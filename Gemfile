@@ -14,6 +14,8 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise'
+gem 'cancancan'
+gem 'rails_admin', '~> 2.0'
 gem 'hamlit-rails'
 
 group :development, :test do
