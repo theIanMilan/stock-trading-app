@@ -1,0 +1,19 @@
+default: &default
+  host: <%= ENV.fetch("DATABASE_HOST") { 'localhost' } %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  port: 5432
+  adapter: postgresql
+  username: <%= ENV.fetch("POSTGRES_USERNAME") { '' } %>
+  password: <%= ENV.fetch("POSTGRES_PASSWORD") { '' } %>
+
+development: 
+  <<: *default
+  database: stock_app_dev
+
+test:
+  <<: *default
+  database: stock_app_test
+
+production:
+  <<: *default
+  detabase: stock_app_prod
