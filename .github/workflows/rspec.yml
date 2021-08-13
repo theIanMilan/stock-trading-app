@@ -33,8 +33,8 @@ jobs:
       run: |
         cp config/database.yml.sample config/database.yml
         yarn install --check-files
-        bundle exec rake db:create
-        bundle exec rake db:schema:load
+        rails db:create
+        rails db:schema:load
       env:
         DATABASE_HOST: 127.0.0.1
         DATABASE_USERNAME: 'postgres'
