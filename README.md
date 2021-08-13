@@ -1,58 +1,37 @@
-# Hi there 👋
+## Live Demo
+View the live app [at heroku.](#)
 
-This repo serves as the main repo for our Rails Projects. 
+## Introduction
 
+A project to explore Test-driven development (TDD).
 
-#### Version
+## Screenshots
 
-```
-  Ruby 2.7.2
-  Rails 6.0.3.4
-  NodeJS 12.18.3
-  Yarn 1.22.4
-```
+<!-- <p float = 'left'>
+    <img src="app/assets/images/Blog-App-1.png" alt="Blog Screenshot 1" width="500" height="300">
+    <img src="app/assets/images/Blog-App-2.png" alt="Blog Screenshot 2" width="500" height="300">
+</p> -->
 
-#### Installation
+## App Architecture:
 
-Fork this repo:
-![image](https://user-images.githubusercontent.com/9253881/111437757-6c527f00-873e-11eb-8d0a-862e4158f4ab.png)
+## Technologies
 
-Then, clone your forked repo to your machine
-```
-  $ git clone git@github.com:<username>/rails-base-project.git <name of your app>
-  $ cd <name of your app>
-```
+* Ruby v2.7.2
+* Ruby on Rails v6.0.3.4
+* NodeJS 12.18.3
+* Yarn 1.22.4
+* CSS and SCSS
+* PostgresQL
+<!-- * [Trix](https://github.com/basecamp/trix)
+* `toastr` for notifications
+* `image-processing` gem -->
 
 #### Setup
 
 ```
   $ bundle install
-  $ rake db:setup
+  $ yarn install --check-files
+  $ bundle exec rails webpacker:install
+  $ rails db:setup
 ```
-
-#### Starting the application
-
-```
-  $ rails server
-```
-
-#### How to run the test suite
-
-```
-  $ rspec
-```
-
-#### How to run the Ruby Linter
-
-```
-  $ rubocop
-```
-
-#### How to enable Github Workflow
-
-<img width="906" alt="Screen Shot 2021-03-23 at 10 10 52 PM" src="https://user-images.githubusercontent.com/9253881/112160501-2fe2bf80-8c25-11eb-8e2b-b9508711ec70.png">
-
-<img width="1244" alt="Screen Shot 2021-03-23 at 10 11 12 PM" src="https://user-images.githubusercontent.com/9253881/112160530-36713700-8c25-11eb-9f00-d69a3a36343f.png">
-
-
-
+Note: `database.yml` uses ENV variables to fetch database username and password. See this [stackoverflow thread](https://stackoverflow.com/a/17151962/15233426) for more details.
