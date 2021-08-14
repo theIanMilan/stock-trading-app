@@ -1,3 +1,20 @@
+GIT
+  remote: https://github.com/sferik/rails_admin.git
+  revision: 283124343be54083cb7712d30d0c15468b2f09fa
+  specs:
+    rails_admin (3.0.0.alpha)
+      activemodel-serializers-xml (>= 1.0)
+      builder (~> 3.1)
+      haml (>= 4.0, < 6)
+      jquery-rails (>= 3.0, < 5)
+      jquery-ui-rails (>= 5.0, < 7)
+      kaminari (>= 0.14, < 2.0)
+      nested_form (~> 0.3)
+      rack-pjax (>= 0.7)
+      rails (>= 5.0, < 7)
+      remotipart (~> 1.3)
+      sassc-rails (>= 1.3, < 3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -184,18 +201,6 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.3.0)
       loofah (~> 2.3)
-    rails_admin (2.2.1)
-      activemodel-serializers-xml (>= 1.0)
-      builder (~> 3.1)
-      haml (>= 4.0, < 6)
-      jquery-rails (>= 3.0, < 5)
-      jquery-ui-rails (>= 5.0, < 7)
-      kaminari (>= 0.14, < 2.0)
-      nested_form (~> 0.3)
-      rack-pjax (>= 0.7)
-      rails (>= 5.0, < 7)
-      remotipart (~> 1.3)
-      sassc-rails (>= 1.3, < 3)
     railties (6.0.3.6)
       actionpack (= 6.0.3.6)
       activesupport (= 6.0.3.6)
@@ -320,7 +325,7 @@ DEPENDENCIES
   pg
   puma (~> 4.1)
   rails (~> 6.0.3, >= 6.0.3.4)
-  rails_admin (~> 2.0)
+  rails_admin!
   rspec-rails
   rubocop-rails
   rubocop-rspec
