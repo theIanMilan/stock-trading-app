@@ -5,17 +5,11 @@ class Ability
 
   def initialize(user)
     # Role inheritance
-    if user.role? :buyer
-      can :read, :all
-    end
+    can :read, :all if user.role? :buyer
 
-    if user.role? :broker
-      can :read, :all
-    end
+    can :read, :all if user.role? :broker
 
-    if user.role? :admin
-      can :manage, :all
-    end
+    can :manage, :all if user.role? :admin
 
     # Define abilities for the passed in user here. For example:
     #
