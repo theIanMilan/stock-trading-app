@@ -9,7 +9,11 @@ class Ability
 
     can :read, :all if user.role? :broker
 
-    can :manage, :all if user.role? :admin
+    return unless user.role? :admin
+
+    # Admin Access
+    can :manage, :all
+    can :access, :rails_admin
 
     # Define abilities for the passed in user here. For example:
     #
