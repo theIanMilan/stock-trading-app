@@ -9,7 +9,7 @@ class Ability
       can :read, :all
     end
 
-    if user.role? :moderator
+    if user.role? :broker
       can :read, :all
     end
 
