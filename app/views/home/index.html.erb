@@ -1,8 +1,8 @@
 <h1>Welcome to CryptoKeeper</h1>
 
 <% if current_user.nil? %>
-	<%= link_to new_user_session_path, class: 'login-button' do %>Sign in<% end %>
-	<%= link_to('Register', new_user_registration_path)  %>
+	<%= link_to new_user_session_path, class: 'login-button' do %>Login<% end %>
+	<%= link_to('Sign up', new_user_registration_path)  %>
 <% else %>
 	<%= link_to dashboard_path, class: 'login-button' do %>Go to App<% end %>
 	<%= link_to('Edit registration', edit_user_registration_path) %>
