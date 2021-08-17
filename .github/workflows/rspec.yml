@@ -9,7 +9,7 @@ jobs:
         image: postgres
         ports: ['5432:5432']
         env:
-          DATABASE_PASSWORD: 'test'
+          DATABASE_PASSWORD: 'postgres'
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -38,7 +38,7 @@ jobs:
       env:
         DATABASE_HOST: 127.0.0.1
         DATABASE_USERNAME: 'postgres'
-        DATABASE_PASSWORD: 'test'
+        DATABASE_PASSWORD: 'postgres'
 
     - name: Run Rubocop
       run: bundle exec rubocop
@@ -48,5 +48,5 @@ jobs:
       env:
         DATABASE_HOST: 127.0.0.1
         DATABASE_USERNAME: 'postgres'
-        DATABASE_PASSWORD: 'test'
+        DATABASE_PASSWORD: 'postgres'
         RAILS_TEST_KEY: ${{ secrets.RAILS_TEST_KEY }}
