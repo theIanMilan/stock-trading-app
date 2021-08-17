@@ -18,7 +18,6 @@ require("channels")
 
 // Toastr
 global.toastr = require('toastr')
-import '../stylesheets/application'
 
 // Bootstrap
 import 'bootstrap/dist/js/bootstrap'

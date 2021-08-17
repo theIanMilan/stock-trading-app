@@ -12,7 +12,16 @@
 
   <body>
     <%# Flash %>
-    <%= toastr_flash %>
+    <% unless flash.empty? %>
+    <div id='flash'>
+      <script type="text/javascript">
+          <% flash.each do |f| %>
+            <% type = f[0].to_s.gsub('alert', 'error').gsub('notice', 'success') %>
+            toastr['<%= type %>']('<%= f[1] %>', '', { closeButton: true, progressBar: true, newestOnTop: false, positionClass: 'toast-bottom-right' });    
+          <% end %>
+      </script>
+    </div>
+    <% end %>
     
     <%= yield %>
   </body>
