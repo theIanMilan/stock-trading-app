@@ -17,7 +17,7 @@ RSpec.describe 'AdminDashboardActions', type: :system do
   it 'logs in as admin through login page' do
     @admin1 = User.create(email: 'testWorld@test.com', password: 'pa55w0rd1234', role: 'admin')
     visit root_path
-    click_link 'Login'
+    click_on 'Log in'
 
     fill_in 'Email', with: 'testWorld@test.com'
     fill_in 'Password', with: 'pa55w0rd1234'
