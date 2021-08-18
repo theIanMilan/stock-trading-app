@@ -9,6 +9,15 @@
   </div>
 
   <div class="field">
+    <% if :role == "Broker" %>
+    <%= flash[:broker] %>
+    <% end %>
+    <%= f.label :role %><br />
+    <%= f.select :role, ["Buyer", "Broker"] %>
+  </div>
+  
+
+  <div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
