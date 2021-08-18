@@ -1,7 +1,7 @@
 <h2>Log in</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
+    <div class="field">
 				<%= image_tag("figma_icons/coolicon.svg", alt: "user icon", :class => "user_icon") %>
 				<%= f.email_field :email, autocomplete: "email", placeholder: "Enter Email" %>
 			</div>

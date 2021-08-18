@@ -2,4 +2,69 @@
   background: var(--bg-color);
   display: flex;
   justify-content: center;
+  text-align: center;
+  position: relative;
+}
+
+h2 {
+  color: white;
+}
+
+em {
+  color: rgb(167, 167, 167);
+  margin-left: 1.5rem;
+}
+
+.forms-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 100vh;
+  padding-top: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+#user_password_confirmation {
+  background-color: var(--input-bg-color);
+  border-radius: 30px;
+  width: 240px;
+  height: 30px;
+  padding: 1rem 1rem 1rem 2.5rem;
+  position: relative;
+  z-index: 0;
+  font-size: 20px;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+#role-container {
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.role-label {
+  font-size: 20px;
+  margin-right: 5px;
+}
+
+#user_role {
+  border-radius: 20px;
+  padding: 0 0.5rem;
+}
+
+#trend-bg {
+  position: absolute;
+  transform: translate(-300px, -50px);
+  z-index: 0;
+}
+
+.bigtrend-bg {
+  position: absolute;
+  transform: translate(-300px, -50px);
+  z-index: -1;
+  height: 900px;
+  width: 900px;
 }

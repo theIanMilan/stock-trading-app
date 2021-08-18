@@ -39,7 +39,7 @@ label {
 
 a:link,
 a:visited {
-  color: white;
+  color: var(--primary-color);
   text-decoration: none;
 }
 
