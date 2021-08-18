@@ -13,3 +13,49 @@
  *= require_tree .
  *= require_self
  */
+
+:root {
+  --primary-color: rgba(63, 15, 255, 1);
+  --bg-color: rgba(13, 20, 26, 1);
+  --secondary-color: rgba(255, 143, 0, 1);
+  --text-color: rgba(255, 255, 255, 1);
+  --input-bg-color: rgba(196, 196, 196, 1);
+  --secondary-bg-color: rgba(37, 40, 48, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background-color: var(--bg-color);
+}
+
+label {
+  color: var(--text-color);
+}
+
+a:link,
+a:visited {
+  color: white;
+  text-decoration: none;
+}
+
+input {
+  background-color: var(--secondary-color);
+  border: none;
+  border-radius: 30px;
+  padding: 5px 1rem;
+  width: 150px;
+}
+
+.field {
+  position: relative;
+  transform: translateX(-12px);
+}
+
+p {
+  color: white;
+}
