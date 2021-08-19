@@ -19,8 +19,8 @@ RSpec.describe 'AdminDashboardActions', type: :system do
     visit root_path
     click_on 'Log in'
 
-    fill_in 'Email', with: 'testWorld@test.com'
-    fill_in 'Password', with: 'pa55w0rd1234'
+    find('#user_email').click.set('testWorld@test.com')
+    find('#user_password').click.set('pa55w0rd1234')
     click_on 'Log in'
 
     expect(page).to have_content('Site Administration')
