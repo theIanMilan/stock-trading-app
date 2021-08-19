@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "UserCreations", type: :system do
+RSpec.describe 'UserCreations', type: :system do
   before do
     driven_by(:rack_test)
   end
@@ -8,7 +8,7 @@ RSpec.describe "UserCreations", type: :system do
   it 'signs up as a buyer' do
     visit root_path
     click_on 'Sign up'
-    
+
     find('#user_email').click.set('buyer3@test.com')
     find('#user_role').click
     find("option[value='Buyer']").click
@@ -22,7 +22,7 @@ RSpec.describe "UserCreations", type: :system do
   it 'signs up as a broker' do
     visit root_path
     click_on 'Sign up'
-    
+
     find('#user_email').click.set('broker4@test.com')
     find('#user_role').click
     find("option[value='Broker']").click
@@ -32,5 +32,4 @@ RSpec.describe "UserCreations", type: :system do
 
     expect(page).to have_content('Logout')
   end
-
 end
