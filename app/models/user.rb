@@ -4,6 +4,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  # Validations
+  validates :email, presence: true,
+                    uniqueness: true
+  validates :role,  presence: true
+
   # Role Inheritance using CanCanCan
   ROLES = %w[buyer broker admin].freeze
 
