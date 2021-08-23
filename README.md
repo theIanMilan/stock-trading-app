@@ -1,5 +1,5 @@
 ## Live Demo
-View the live app [at heroku.](#)
+View the live app [at heroku.](https://stockup-trading.herokuapp.com/)
 
 ## Introduction
 
