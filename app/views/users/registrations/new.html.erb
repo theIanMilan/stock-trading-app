@@ -13,12 +13,27 @@
 				<%= f.email_field :email, autocomplete: "email", placeholder: "Enter Email" %>
 			</div>
 
+      <div class="field">
+				<%= image_tag("figma_icons/coolicon.svg", alt: "user icon", :class => "user_icon") %>
+				<%= f.text_field :firstname, autocomplete: "firstname", placeholder: "First Name" %>
+			</div>
+
+      <div class="field">
+				<%= image_tag("figma_icons/coolicon.svg", alt: "user icon", :class => "user_icon") %>
+				<%= f.text_field :lastname, autocomplete: "lastname", placeholder: "Last Name" %>
+			</div>
+
+      <div class="field">
+				<%= image_tag("figma_icons/coolicon.svg", alt: "user icon", :class => "user_icon") %>
+				<%= f.text_field :username, autocomplete: "username", placeholder: "Username" %>
+			</div>
+
       <div class="field" id="role-container">
         <% if :role == "Broker" %>
         <%= flash[:broker] %>
         <% end %>
         <%= f.label :role, :class => "role-label" %><br />
-        <%= f.select :role, ["Buyer", "Broker"] %>
+        <%= f.select :role, ["buyer", "broker"] %>
       </div>
       
       <div class="field">

@@ -16,11 +16,11 @@
 		<div class= "login-container">
 			<div class="field">
 				<%= image_tag("figma_icons/coolicon.svg", alt: "user icon", :class => "user_icon") %>
-				<%= f.email_field :email, autocomplete: "email", placeholder: "Enter Email" %>
+				<%= f.text_field :username, autocomplete: "username", placeholder: "Username" %>
 			</div>
 		
 			<div class="field">
-			<%= image_tag("figma_icons/lock_outline.svg", alt: "user icon", :class => "user_icon") %>
+				<%= image_tag("figma_icons/lock_outline.svg", alt: "user icon", :class => "user_icon") %>
 				<%= f.password_field :password, autocomplete: "current-password", placeholder: "Password" %>
 			</div>
 		
