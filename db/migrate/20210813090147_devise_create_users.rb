@@ -34,6 +34,11 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
       
       # Roles
       t.string :role, default: 'buyer'
+      t.string :username
+      t.string :firstname
+      t.string :lastname
+      t.decimal :balance, default: 0.00
+      t.boolean :approved?, default: nil
 
       t.timestamps null: false
     end
@@ -48,6 +53,9 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
       u.email = 'admin@example.com'
       u.password = 'password'
       u.role = 'admin'
+      u.username = 'admin'
+      u.firstname = 'admin'
+      u.lastname = 'admin'
     end
   end
 end
