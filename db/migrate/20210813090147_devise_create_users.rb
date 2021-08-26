@@ -38,13 +38,14 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
       t.string :firstname
       t.string :lastname
       t.decimal :balance, default: 0.00
-      t.boolean :approved?, default: nil
+      t.integer :broker_status, default: 0
 
       t.timestamps null: false
     end
 
     add_index :users, :email,                unique: true
     add_index :users, :reset_password_token, unique: true
+    add_index :users, :broker_status
     # add_index :users, :confirmation_token,   unique: true
     # add_index :users, :unlock_token,         unique: true
 
