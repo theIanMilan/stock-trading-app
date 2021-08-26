@@ -5,9 +5,14 @@ RSpec.describe 'AdminDashboardActions', type: :system do
     driven_by(:rack_test)
   end
 
-  let(:admin) { User.create(email: 'helloWorld@test.com', password: 'pa55w0rd1234', role: 'admin') }
-  let!(:user1) { User.create(email: 'buyer1@test.com', password: 'pa55w0rd1234') }
-  let!(:user2) { User.create(email: 'buyer2@test.com', password: 'pa55w0rd1234') }
+  let!(:admin) do
+    create(:user,
+           email: 'testWorld@test.com',
+           password: 'pa55w0rd1234',
+           role: 'admin')
+  end
+  let!(:user1) { create(:user, role: 'buyer') }
+  let!(:user2) { create(:user, role: 'buyer') }
 
   def admin_login
     login_as(admin, scope: :user)
@@ -15,7 +20,6 @@ RSpec.describe 'AdminDashboardActions', type: :system do
   end
 
   it 'logs in as admin through login page' do
-    @admin1 = User.create(email: 'testWorld@test.com', password: 'pa55w0rd1234', role: 'admin')
     visit root_path
     click_on 'Log in'
 

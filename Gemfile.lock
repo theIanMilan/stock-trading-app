@@ -1,4 +1,12 @@
 GIT
+  remote: https://github.com/faker-ruby/faker.git
+  revision: 4767edc5a11215ff2c023b582d1cb14ffe4e276b
+  branch: master
+  specs:
+    faker (2.19.0)
+      i18n (>= 1.6, < 2)
+
+GIT
   remote: https://github.com/sferik/rails_admin.git
   revision: 283124343be54083cb7712d30d0c15468b2f09fa
   specs:
@@ -344,6 +352,7 @@ DEPENDENCIES
   database_rewinder
   devise
   factory_bot_rails
+  faker!
   hamlit-rails
   jbuilder (~> 2.7)
   listen (~> 3.2)

@@ -8,6 +8,11 @@ class User < ApplicationRecord
   # broker_status
   enum broker_status: { application_pending: 0, pending_approval: 1, approved: 2 }
 
+  # Validations
+  validates :email, presence: true,
+                    uniqueness: true
+  validates :role,  presence: true
+
   # Role Inheritance using CanCanCan
   ROLES = %w[buyer broker admin].freeze
 

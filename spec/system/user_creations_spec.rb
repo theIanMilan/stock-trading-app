@@ -17,6 +17,7 @@ RSpec.describe 'UserCreations', type: :system do
     click_on 'Sign up'
 
     expect(page).to have_content('Logout')
+    expect(User.last.email).to eq('buyer3@test.com')
   end
 
   it 'signs up as a broker' do
@@ -31,5 +32,6 @@ RSpec.describe 'UserCreations', type: :system do
     click_on 'Sign up'
 
     expect(page).to have_content('Logout')
+    expect(User.last.email).to eq('broker4@test.com')
   end
 end
