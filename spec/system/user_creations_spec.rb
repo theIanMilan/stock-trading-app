@@ -11,7 +11,7 @@ RSpec.describe 'UserCreations', type: :system do
 
     find('#user_email').click.set('buyer3@test.com')
     find('#user_role').click
-    find("option[value='Buyer']").click
+    find("option[value='buyer']").click
     find('#user_password').click.set('pa55w0rd1234')
     find('#user_password_confirmation').click.set('pa55w0rd1234')
     click_on 'Sign up'
@@ -26,7 +26,7 @@ RSpec.describe 'UserCreations', type: :system do
 
     find('#user_email').click.set('broker4@test.com')
     find('#user_role').click
-    find("option[value='Broker']").click
+    find("option[value='broker']").click
     find('#user_password').click.set('pa55w0rd1234')
     find('#user_password_confirmation').click.set('pa55w0rd1234')
     click_on 'Sign up'
