@@ -19,5 +19,4 @@ class UserMailer < ApplicationMailer
     @url = 'https://stockup-trading.herokuapp.com/'
     mail(to: @user.email, subject: 'Broker Confirmation')
   end
-
 end
