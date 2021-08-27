@@ -16,7 +16,7 @@
 		<div class= "login-container">
 			<div class="field">
 				<%= image_tag("figma_icons/coolicon.svg", alt: "user icon", :class => "user_icon") %>
-				<%= f.text_field :username, autocomplete: "username", placeholder: "Username" %>
+				<%= f.email_field :email, autocomplete: "email", placeholder: "Email" %>
 			</div>
 		
 			<div class="field">

@@ -3,7 +3,9 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  around_create :register_as_broker 
   after_create :send_admin_mail
+  after_update :send_broker_confirmation
 
   # broker_status
   enum broker_status: { application_pending: 0, pending_approval: 1, approved: 2 }
@@ -20,7 +22,25 @@ class User < ApplicationRecord
     ROLES.index(base_role.to_s) <= ROLES.index(role)
   end
 
+  def register_as_broker
+    if self.role? :broker
+      self.role = 'buyer'
+      self.broker_status = 'pending_approval'
+      yield
+    end
+  end
+
   def send_admin_mail
-    UserMailer.send_welcome_email(self).deliver_later
+    if self.broker_status == 'pending_approval'
+      UserMailer.send_pending_broker_email(self).deliver_later
+    else
+      UserMailer.send_welcome_email(self).deliver_later
+    end
+  end
+
+  def send_broker_confirmation
+    if self.broker_status == 'approved'
+      UserMailer.send_confirmation_broker_email(self).deliver_later
+    end
   end
 end
