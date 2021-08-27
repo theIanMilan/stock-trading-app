@@ -13,6 +13,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
+gem 'dotenv-rails', groups: [:development, :test]
 gem 'devise'
 gem 'cancancan'
 gem 'rails_admin', git: 'https://github.com/sferik/rails_admin.git'

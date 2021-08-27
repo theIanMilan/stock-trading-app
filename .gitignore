@@ -44,3 +44,4 @@ config/database.yml
 config/secrets.yml
 
 /config/credentials/test.key
+.env
