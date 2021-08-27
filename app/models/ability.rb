@@ -5,9 +5,9 @@ class Ability
 
   def initialize(user)
     # Role inheritance
-    can :read, :all if user.role? :buyer
+    can :manage, :all if user.role? :buyer
 
-    can :read, :all if user.role? :broker
+    can :manage, :all if user.role? :broker
 
     return unless user.role? :admin
 
