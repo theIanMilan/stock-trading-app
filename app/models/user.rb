@@ -24,7 +24,6 @@ class User < ApplicationRecord
 
   def register_as_broker
     return unless role == 'broker'
-
     self.role = 'buyer'
     self.broker_status = 'pending_approval'
     save!

@@ -76,4 +76,16 @@ RSpec.describe 'AdminDashboardActions', type: :system do
 
     expect(page).to have_content('User successfully updated')
   end
+
+  it 'approves broker application' do
+    admin_login
+    visit "/admin/user/#{user1.id}/edit"
+
+    find('.dropdown-toggle').click
+    find("option[value='approved']").click
+    find('#user_role').set('broker')
+    click_button 'Save'
+
+    expect(page).to have_content('User successfully updated')
+  end
 end
