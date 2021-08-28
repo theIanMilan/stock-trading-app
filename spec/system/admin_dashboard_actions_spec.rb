@@ -5,17 +5,16 @@ RSpec.describe 'AdminDashboardActions', type: :system do
     driven_by(:rack_test)
   end
 
-  let!(:admin) do
-    create(:user,
-           email: 'testWorld@test.com',
-           password: 'pa55w0rd1234',
-           role: 'admin')
+  let(:admin_account) do
+    User.create(email: 'admin@example.com',
+                password: 'password',
+                role: 'admin')
   end
-  let!(:user1) { create(:user, role: 'buyer') }
-  let!(:user2) { create(:user, role: 'buyer') }
+  let!(:user1) { create(:user) }
+  let!(:user2) { create(:user) }
 
   def admin_login
-    login_as(admin, scope: :user)
+    login_as(admin_account, scope: :user)
     visit rails_admin_path
   end
 
@@ -23,14 +22,15 @@ RSpec.describe 'AdminDashboardActions', type: :system do
     visit root_path
     click_on 'Log in'
 
-    find('#user_email').click.set('testWorld@test.com')
-    find('#user_password').click.set('pa55w0rd1234')
+    find('#user_email').click.set(admin_account.email)
+    find('#user_password').click.set(admin_account.password)
     click_on 'Log in'
 
     expect(page).to have_content('Site Administration')
   end
 
   it 'see all registered users in admin dashboard' do
+    expect(admin_account.role).to eq('admin')
     admin_login
 
     within 'table.table-striped' do

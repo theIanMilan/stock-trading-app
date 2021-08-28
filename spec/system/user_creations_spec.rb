@@ -29,7 +29,7 @@ RSpec.describe 'UserCreations', type: :system do
     find('#user_lastname').click.set('Sal')
     find('#user_username').click.set('brokerTest')
     find('#user_role').click
-    find("option[value='Broker']").click
+    find("option[value='broker']").click
     find('#user_password').click.set('pa55w0rd1234')
     find('#user_password_confirmation').click.set('pa55w0rd1234')
     click_on 'Sign up'
