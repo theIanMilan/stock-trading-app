@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  around_create :register_as_broker 
+  after_create :register_as_broker
   after_create :send_admin_mail
   after_update :send_broker_confirmation
 
@@ -23,15 +23,14 @@ class User < ApplicationRecord
   end
 
   def register_as_broker
-    if self.role? :broker
-      self.role = 'buyer'
-      self.broker_status = 'pending_approval'
-      yield
-    end
+    return unless role == 'broker'
+    self.role = 'buyer'
+    self.broker_status = 'pending_approval'
+    save!
   end
 
   def send_admin_mail
-    if self.broker_status == 'pending_approval'
+    if broker_status == 'pending_approval'
       UserMailer.send_pending_broker_email(self).deliver_later
     else
       UserMailer.send_welcome_email(self).deliver_later
@@ -39,8 +38,6 @@ class User < ApplicationRecord
   end
 
   def send_broker_confirmation
-    if self.broker_status == 'approved'
-      UserMailer.send_confirmation_broker_email(self).deliver_later
-    end
+    UserMailer.send_confirmation_broker_email(self).deliver_later if broker_status == 'approved'
   end
 end
