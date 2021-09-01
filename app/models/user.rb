@@ -24,6 +24,7 @@ class User < ApplicationRecord
 
   def register_as_broker
     return unless role == 'broker'
+
     self.role = 'buyer'
     self.broker_status = 'pending_approval'
     save!
@@ -38,6 +39,14 @@ class User < ApplicationRecord
   end
 
   def send_broker_confirmation
-    UserMailer.send_confirmation_broker_email(self).deliver_later if broker_status == 'approved'
+    return unless broker_status == 'approved'
+
+    UserMailer.send_confirmation_broker_email(self).deliver_later
+
+    # Self assigns broker role
+    return unless role == 'buyer'
+
+    self.role = 'broker'
+    save!
   end
 end

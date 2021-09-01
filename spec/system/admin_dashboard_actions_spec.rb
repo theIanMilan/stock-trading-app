@@ -70,22 +70,30 @@ RSpec.describe 'AdminDashboardActions', type: :system do
 
     fill_in 'Password', with: 'helloWorld'
     fill_in 'Password confirmation', with: 'helloWorld'
+    fill_in 'Username', with: 'JohnIsAmazing1001'
+    fill_in 'Firstname', with: 'John'
     find('#user_reset_password_sent_at').set('August 11, 2021 12:00')
     find('#user_remember_created_at').set('August 11, 2021 12:00')
     click_button 'Save'
 
     expect(page).to have_content('User successfully updated')
+    expect(page).to have_content('JohnIsAmazing1001')
+    expect(page).to have_content('John')
   end
 
   it 'approves broker application' do
     admin_login
     visit "/admin/user/#{user1.id}/edit"
 
-    find('.dropdown-toggle').click
-    find("option[value='approved']").click
-    find('#user_role').set('broker')
+    page.select 'approved', from: 'Broker status'
     click_button 'Save'
 
     expect(page).to have_content('User successfully updated')
+
+    # View user info and expect change in User's properties
+    visit "/admin/user/#{user1.id}"
+
+    expect(page).to have_content('broker')
+    expect(page).to have_content('approved')
   end
 end
