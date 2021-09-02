@@ -4,14 +4,21 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    # Role inheritance
-    can :read, :all if user.role? :buyer
+    can :read, Stock
 
-    can :read, :all if user.role? :broker
+    # return unless user.present?
+
+    # can :manage, Transaction, user: user
+    # can :manage, Order,       user: user
+
+    return unless user.role? :broker
+
+    can :create, Stock
+    can :update, Stock,       user: user
+    can :destroy, Stock,      user: user
 
     return unless user.role? :admin
 
-    # Admin Access
     can :manage, :all
     can :access, :rails_admin
 
