@@ -96,4 +96,15 @@ RSpec.describe 'AdminDashboardActions', type: :system do
     expect(page).to have_content('broker')
     expect(page).to have_content('approved')
   end
+
+  it 'makes user a broker from buyer account' do
+    admin_login
+    visit "/admin/user/#{user1.id}/edit"
+    expect(page).to have_content('Broker status')
+
+    find('#user_role').set('broker')
+    click_button 'Save'
+
+    expect(page).to have_content('User successfully updated')
+  end
 end
