@@ -5,7 +5,7 @@ RSpec.describe 'AdminDashboardActions', type: :system do
     driven_by(:rack_test)
   end
 
-  let(:admin_account) { create(:user, :admin) } 
+  let(:admin_account) { create(:user, :admin) }
   let!(:user1) { create(:user) }
   let!(:user2) { create(:user) }
 
