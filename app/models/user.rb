@@ -16,7 +16,11 @@ class User < ApplicationRecord
   # Validations
   validates :email, presence: true,
                     uniqueness: true
-  validates :role,  presence: true
+  validates :username, presence: true
+  validates :firstname, presence: true
+  validates :lastname, presence: true
+  validates :role, presence: true
+  validates :balance, numericality: { greater_than_or_equal_to: 0 }
 
   # Role Inheritance using CanCanCan
   ROLES = %w[buyer broker admin].freeze
