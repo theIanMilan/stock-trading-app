@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
 }
 
+  resources :stocks
+
   root 'home#index'
   get '/home',          to: 'home#index'
   get '/dashboard',     to: 'dashboard#index'
