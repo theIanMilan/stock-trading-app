@@ -10,6 +10,9 @@ RSpec.describe 'UserCreations', type: :system do
     click_on 'Sign up'
 
     find('#user_email').click.set('buyer3@test.com')
+    find('#user_username').click.set('UsersNames123')
+    find('#user_firstname').click.set('Thirdy')
+    find('#user_lastname').click.set('Lasty')
     find('#user_role').click
     find("option[value='buyer']").click
     find('#user_password').click.set('pa55w0rd1234')

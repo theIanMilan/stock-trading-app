@@ -5,11 +5,7 @@ RSpec.describe 'AdminDashboardActions', type: :system do
     driven_by(:rack_test)
   end
 
-  let(:admin_account) do
-    User.create(email: 'admin@example.com',
-                password: 'password',
-                role: 'admin')
-  end
+  let(:admin_account) { create(:user, :admin) } 
   let!(:user1) { create(:user) }
   let!(:user2) { create(:user) }
 
@@ -57,6 +53,9 @@ RSpec.describe 'AdminDashboardActions', type: :system do
     fill_in 'Email', with: 'userCreation@test.com'
     fill_in 'Password', with: 'pa55w0rd1234'
     fill_in 'Password confirmation', with: 'pa55w0rd1234'
+    find('#user_username').click.set('UsersNames123')
+    find('#user_firstname').click.set('Thirdy')
+    find('#user_lastname').click.set('Lasty')
     find('#user_reset_password_sent_at').set('August 11, 2021 12:00')
     find('#user_remember_created_at').set('August 11, 2021 12:00')
     click_button 'Save'
