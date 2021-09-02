@@ -1,4 +1,6 @@
 class StocksController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:index]
+  load_and_authorize_resource # CanCan authorization helper
   before_action :set_stock, only: %i[show edit update destroy]
 
   # GET /stocks or /stocks.json
@@ -20,6 +22,8 @@ class StocksController < ApplicationController
   # POST /stocks or /stocks.json
   def create
     @stock = Stock.new(stock_params)
+    # Associate with Broker
+    current_user.stocks << @stock
 
     respond_to do |format|
       if @stock.save
@@ -61,6 +65,6 @@ class StocksController < ApplicationController
   end
 
   def stock_params
-    params.fetch(:stock, {})
+    params.require(:stock).permit(:ticker, :company_name, :price, :quantity)
   end
 end
