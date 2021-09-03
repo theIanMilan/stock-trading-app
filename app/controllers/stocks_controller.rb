@@ -22,11 +22,10 @@ class StocksController < ApplicationController
   # POST /stocks or /stocks.json
   def create
     @stock = Stock.new(stock_params)
-    # Associate with Broker
-    current_user.stocks << @stock
-
     respond_to do |format|
       if @stock.save
+        # Associate with Broker
+        current_user.stocks << @stock
         format.html { redirect_to @stock, notice: 'Stock was successfully created.' }
         format.json { render :show, status: :created, location: @stock }
       else
