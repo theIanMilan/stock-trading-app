@@ -8,7 +8,7 @@ class User < ApplicationRecord
              # Since user_id does not exist, cannot create through User.find(n).transaction_records.create!()
              unscope(:where).where(broker: user).or(where(buyer: user))
            }, dependent: :destroy,
-           inverse_of: :user
+           inverse_of: :buyer
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
