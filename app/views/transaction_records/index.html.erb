@@ -1,0 +1,21 @@
+<h1>Transaction History</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="7"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @transaction_records.each do |transaction| %>
+      <tr>
+        <td><%= transaction.ticker %>
+        <td><%= transaction.company_name %>
+        <td><%= transaction.price %>
+        <td><%= transaction.quantity %>
+        <td><%= transaction.created_at %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
