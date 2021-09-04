@@ -39,15 +39,17 @@ ActiveRecord::Schema.define(version: 2021_09_04_014922) do
   end
 
   create_table "transaction_records", force: :cascade do |t|
-    t.bigint "user_id"
     t.bigint "stock_id"
+    t.bigint "buyer_id", null: false
+    t.bigint "broker_id", null: false
     t.integer "transaction_type"
     t.decimal "price", precision: 8, scale: 2
     t.integer "quantity"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["broker_id"], name: "index_transaction_records_on_broker_id"
+    t.index ["buyer_id"], name: "index_transaction_records_on_buyer_id"
     t.index ["stock_id"], name: "index_transaction_records_on_stock_id"
-    t.index ["user_id"], name: "index_transaction_records_on_user_id"
   end
 
   create_table "user_stocks", force: :cascade do |t|

@@ -2,7 +2,13 @@ class User < ApplicationRecord
   has_many :user_stocks, dependent: :destroy
   has_many :stocks, through: :user_stocks
   has_many :orders, dependent: :destroy
-  has_many :transaction_records, dependent: :destroy
+  has_many :transaction_records,
+           lambda { |user|
+             # Removes default where clause of searching for user_id
+             # Since user_id does not exist, cannot create through User.find(n).transaction_records.create!()
+             unscope(:where).where(broker: user).or(where(buyer: user))
+           }, dependent: :destroy,
+           inverse_of: :user
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
