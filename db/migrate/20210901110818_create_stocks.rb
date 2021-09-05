@@ -3,7 +3,7 @@ class CreateStocks < ActiveRecord::Migration[6.0]
     create_table :stocks do |t|
       t.string :ticker
       t.string :company_name
-      t.decimal :price, precision: 8, scale: 2
+      t.decimal :last_transaction_price, precision: 8, scale: 2, default: 0
       t.integer :quantity
       t.timestamps
     end
@@ -12,6 +12,7 @@ class CreateStocks < ActiveRecord::Migration[6.0]
       t.belongs_to :user
       t.belongs_to :stock
       t.decimal :average_price, precision: 8, scale: 2
+      t.integer :total_shares
       t.timestamps
     end
 
