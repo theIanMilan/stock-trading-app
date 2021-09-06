@@ -9,7 +9,9 @@ class StocksController < ApplicationController
   end
 
   # GET /stocks/1 or /stocks/1.json
-  def show; end
+  def show
+    @orders = @stock.orders
+  end
 
   # GET /stocks/new
   def new

@@ -1,3 +1,5 @@
 class DashboardController < ApplicationController
-  def index; end
+  def index
+    @user_stocks = current_user.user_stocks.all
+  end
 end
