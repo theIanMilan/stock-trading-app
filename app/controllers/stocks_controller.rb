@@ -7,7 +7,10 @@ class StocksController < ApplicationController
     @stocks = Stock.all
   end
 
-  def show; end
+  # GET /stocks/1 or /stocks/1.json
+  def show
+    @orders = @stock.orders
+  end
 
   def new
     @stock = Stock.new

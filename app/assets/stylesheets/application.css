@@ -33,6 +33,10 @@ html {
   background-color: var(--bg-color);
 }
 
+body {
+  background: var(--bg-color);
+}
+
 label {
   color: var(--text-color);
 }
@@ -58,4 +62,8 @@ input {
 
 p {
   color: white;
+}
+
+.body-container {
+  background: var(--bg-color);
 }
