@@ -65,11 +65,12 @@ class OrdersController < ApplicationController
     @user_stock = @user.user_stocks.find_by(stock_id: @order.stock_id)
     if @user_stock.nil?
       # Create New empty user_stock if user has no associated stock
-      @user_stock = @user.user_stocks.new(stock_id: @stock,
-                                          user_id: @user,
-                                          average_price: 0.0,
-                                          total_shares: 0)
-      @user_stock.save
+      @user_stock = @user.user_stocks.create!(
+        stock_id: @stock.id,
+        user_id: @user,
+        average_price: 0.0,
+        total_shares: 0
+      )
     end
 
     @user2_order = @matching_orders.first
@@ -77,11 +78,12 @@ class OrdersController < ApplicationController
     @user2_stock = @user2.user_stocks.find_by(stock_id: @order.stock_id)
     if @user2_stock.nil?
       # Create New empty user_stock if user2 has no associated stock
-      @user2_stock = @user2.user_stocks.new(stock_id: @stock,
-                                            user_id: @user2_stock,
-                                            average_price: 0.0,
-                                            total_shares: 0)
-      @user2_stock.save
+      @user2_stock = @user2.user_stocks.create!(
+        stock_id: @stock.id,
+        user_id: @user2_stock,
+        average_price: 0.0,
+        total_shares: 0
+      )
     end
 
     Order.transaction do
@@ -103,9 +105,10 @@ class OrdersController < ApplicationController
         create_transaction(@user, @user2, @stock, match_price, match_quantity)
       when 'sell'
         # Determine price & quantity
-        # Price and Quantity is max of user and user2
+        # Price is max of user and user2
+        # Quantity is min of user and user2
         match_price    = [@order.price, @user2_order.price].max
-        match_quantity = [@order.quantity, @user2_order.quantity].max
+        match_quantity = [@order.quantity, @user2_order.quantity].min
         total_value = match_price * match_quantity
 
         # Transfer Balance
@@ -122,13 +125,9 @@ class OrdersController < ApplicationController
       # Update and Destroy Orders
       update_quantity_of_orders(@order, @user2_order, match_quantity)
       # Due to after_save callback, this will process next unfulfilled and matching orders until there are no more matches
-      # redirect_to dashboard_path
-      # byebug
-      # return
     end
-    # Block will only be executed if above transaction fails
+    # For Transaction errors:
     # flash[:alert] = 'Fatal error encountered while procesing your order. Please try again.'
-    # redirect_back(fallback_location: @stock)
   end
 
   def transfer_balance(buyer, seller, total_value)
@@ -148,12 +147,11 @@ class OrdersController < ApplicationController
   end
 
   def create_transaction(buyer, seller, stock, price, quantity)
-    transaction = TransactionRecord.new(stock_id: stock,
-                                        buyer_id: buyer,
-                                        broker_id: seller,
-                                        price: price,
-                                        quantity: quantity)
-    transaction.save
+    TransactionRecord.create!(stock_id: stock.id,
+                              buyer_id: buyer.id,
+                              broker_id: seller.id,
+                              price: price,
+                              quantity: quantity)
   end
 
   private
