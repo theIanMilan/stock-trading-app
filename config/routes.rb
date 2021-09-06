@@ -7,11 +7,12 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
 }
 
-  resources :stocks do
-    resources :orders
-  end
-
   root 'home#index'
   get '/home',          to: 'home#index'
   get '/dashboard',     to: 'dashboard#index'
+  get '/transactions',  to: 'transaction_records#index'
+
+  resources :stocks do
+    resources :orders
+  end
 end

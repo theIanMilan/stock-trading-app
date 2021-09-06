@@ -2,10 +2,9 @@
 
   <div><%= @stock.ticker %></div>
   <div><%= @stock.company_name %></div>
-  <div><%= @stock.price %></div>
+  <div><%= @stock.last_transaction_price %></div>
   <div><%= @stock.quantity %></div>
 
-<%= link_to 'Edit', edit_stock_path(@stock) %> |
 <%= link_to 'Back', stocks_path %>
 
 <p>Order</p>

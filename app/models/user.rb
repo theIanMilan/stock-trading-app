@@ -2,6 +2,13 @@ class User < ApplicationRecord
   has_many :user_stocks, dependent: :destroy
   has_many :stocks, through: :user_stocks
   has_many :orders, dependent: :destroy
+  has_many :transaction_records,
+           lambda { |user|
+             # Removes default where clause of searching for user_id
+             # Since user_id does not exist, cannot create through User.find(n).transaction_records.create!()
+             unscope(:where).where(broker: user).or(where(buyer: user))
+           }, dependent: :destroy,
+           inverse_of: :buyer
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -26,9 +33,19 @@ class User < ApplicationRecord
   # Role Inheritance using CanCanCan
   ROLES = %w[buyer broker admin].freeze
 
+  def sufficient_balance?(amount)
+    balance >= amount
+  end
+
+  def change_balance_by(amount)
+    update(balance: balance + amount)
+  end
+
   def role?(base_role)
     ROLES.index(base_role.to_s) <= ROLES.index(role)
   end
+
+  private
 
   def register_as_broker
     return unless role == 'broker'

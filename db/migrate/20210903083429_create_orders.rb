@@ -6,7 +6,6 @@ class CreateOrders < ActiveRecord::Migration[6.0]
       t.integer :transaction_type
       t.decimal :price, precision: 8, scale: 2
       t.integer :quantity
-
       t.timestamps
     end
   end
