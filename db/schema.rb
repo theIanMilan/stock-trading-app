@@ -42,7 +42,6 @@ ActiveRecord::Schema.define(version: 2021_09_04_014922) do
     t.bigint "stock_id"
     t.bigint "buyer_id", null: false
     t.bigint "broker_id", null: false
-    t.integer "transaction_type"
     t.decimal "price", precision: 8, scale: 2
     t.integer "quantity"
     t.datetime "created_at", precision: 6, null: false
