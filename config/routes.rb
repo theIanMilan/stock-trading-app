@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get '/dashboard',     to: 'dashboard#index'
   get '/transactions',  to: 'transaction_records#index'
 
-  resources :stocks, only: [:index, :show, :new, :create] do
+  resources :stocks do
     resources :orders
   end
 end

@@ -37,11 +37,15 @@ class User < ApplicationRecord
     balance >= amount
   end
 
-  # method for add/subtract money??
+  def change_balance_by(amount)
+    update(balance: balance + amount)
+  end
 
   def role?(base_role)
     ROLES.index(base_role.to_s) <= ROLES.index(role)
   end
+
+  private
 
   def register_as_broker
     return unless role == 'broker'
