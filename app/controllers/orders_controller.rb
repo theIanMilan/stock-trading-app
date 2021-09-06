@@ -64,11 +64,15 @@ class OrdersController < ApplicationController
 
     Order.transaction do
       total_cost = price * quantity
-      
-      if transaction_type == 'buy'
+      @user_stock = user.user_stocks.find_by(stock_id: stock_id)
+      @order_counterpart = @matching_orders.first
+      @user_counterpart = @order_counterpart.user
 
-      else
-
+      case transaction_type
+      when 'buy'
+        current_user if current_user.sufficient_balance?(total_cost)
+      when 'sell'
+        @user_counterpart.user if @user_counterpart.sufficient_balance?(total_cost)
       end
     end
   end

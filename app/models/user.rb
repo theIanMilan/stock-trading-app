@@ -33,6 +33,12 @@ class User < ApplicationRecord
   # Role Inheritance using CanCanCan
   ROLES = %w[buyer broker admin].freeze
 
+  def sufficient_balance?(amount)
+    balance >= amount
+  end
+
+  # method for add/subtract money??
+
   def role?(base_role)
     ROLES.index(base_role.to_s) <= ROLES.index(role)
   end
