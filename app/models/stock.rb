@@ -8,6 +8,6 @@ class Stock < ApplicationRecord
                            uniqueness: true
   validates :company_name, presence: true,
                            uniqueness: true
-  validates :last_transaction_price, numericality: { greater_than_or_equal_to: 0 }
-  validates :quantity, numericality: { greater_than_or_equal_to: 0 }
+  validates :last_transaction_price, numericality: { greater_than: 0 }
+  validates :quantity, numericality: { greater_than: 0 }
 end

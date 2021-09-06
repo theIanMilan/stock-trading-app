@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 2021_09_04_014922) do
   create_table "stocks", force: :cascade do |t|
     t.string "ticker"
     t.string "company_name"
-    t.decimal "last_transaction_price", precision: 8, scale: 2, default: "0.0"
+    t.decimal "last_transaction_price", precision: 8, scale: 2
     t.integer "quantity"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
