@@ -38,6 +38,7 @@ class User < ApplicationRecord
   end
 
   def change_balance_by(amount)
+    # byebug
     update(balance: balance + amount)
   end
 

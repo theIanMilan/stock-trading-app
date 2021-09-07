@@ -6,6 +6,11 @@ FactoryBot.define do
     firstname { Faker::Name.first_name }
     lastname { Faker::Name.last_name }
     role { 'buyer' }
+
+    # Skips specific callback when building
+    after(:build) do |user|
+      user.class.skip_callback(:create, :after, :register_as_broker, raise: false)
+    end
   end
 
   trait :skip_validations do
@@ -23,11 +28,6 @@ FactoryBot.define do
   end
 
   trait :broker do
-    to_create do |instance|
-      # Skip specific after_create callback
-      instance.class.skip_callback(:create, :after, :register_as_broker)
-      instance.save(validate: false)
-    end
     role { 'broker' }
     broker_status { 'approved' }
   end

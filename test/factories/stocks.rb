@@ -6,8 +6,8 @@ FactoryBot.define do
     quantity { Faker::Number.within(range: 10_000..100_000) }
   end
 
-  trait :p10_q1000 do
+  trait :p10_q100 do
     last_transaction_price { 10 }
-    quantity { 1_000 }
+    quantity { 100 }
   end
 end
