@@ -12,23 +12,40 @@
   <h2>Orders<h2>
     <table class="table table-dark table-striped">
       <thead>
-      <tr>
-        <th scope="col">Order Type</th>
-        <th scope="col">Price</th>
-        <th scope="col">Quantity</th>
-        <th scope="col">Posted</th>
-      </tr>
+        <tr>
+          <th scope="col">Order Type</th>
+          <th scope="col">Price</th>
+          <th scope="col">Quantity</th>
+        </tr>
       </thead>
-    <% @orders.each do |order| %>
+        <% @buy_orders.each do |order| %>
       <tbody>
-      <tr>
-        <td><%= order.transaction_type %></td>
-        <td><%= order.price %></td>
-        <td><%= order.quantity %></td>
-        <td><%= order.created_at %></td>
-      </tr>
-    </tbody>
-    <% end %>
+        <tr>
+          <td><%= order.transaction_type %></td>
+          <td><%= order.price %></td>
+          <td><%= order.quantity %></td>
+        </tr>
+      </tbody>
+      <% end %>
+    </table>
+
+    <table class="table table-dark table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Order Type</th>
+          <th scope="col">Price</th>
+          <th scope="col">Quantity</th>
+        </tr>
+      </thead>
+        <% @sell_orders.each do |order| %>
+      <tbody>
+        <tr>
+          <td><%= order.transaction_type %></td>
+          <td><%= order.price %></td>
+          <td><%= order.quantity %></td>
+        </tr>
+      </tbody>
+      <% end %>
     </table>
 
 <%= link_to 'Add Order', new_stock_order_path(@stock) %>
