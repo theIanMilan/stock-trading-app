@@ -1,5 +1,13 @@
 <div class= "body-container">
+  <div class= "user-info"> 
+    <h2>Hello <%= current_user.username %></h2>
+  </div>
   <h1> My Portfolio </h1>
-  <% @user_stocks.each do |stock| %>
+  <% @user_stocks.each do |ustock| %>
+    <div class= "portfolio-cards">
+      <div><%= ustock.ticker%></div> 
+      <div><%= ustock.total_shares%></div> 
+      <div><%= ustock.average_price%></div> 
+      </div>
   <% end %>
 </div>

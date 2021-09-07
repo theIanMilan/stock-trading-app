@@ -10,6 +10,8 @@ class StocksController < ApplicationController
   # GET /stocks/1 or /stocks/1.json
   def show
     @orders = @stock.orders
+    @buy_orders = @orders.buy_transactions
+    @sell_orders = @orders.sell_transactions
   end
 
   def new
