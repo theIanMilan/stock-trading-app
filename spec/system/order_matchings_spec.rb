@@ -5,70 +5,68 @@ RSpec.describe 'OrderMatchings', type: :system do
     driven_by(:rack_test)
   end
 
-  # # Initialize Buyer
-  # let!(:user)  { create(:user, :buyer) }
+  let!(:buyer)  { create(:user, :buyer) }
+  let!(:broker) { create(:user, :broker) }
+  let!(:stock) { create(:stock, :p10_q100) }
 
-  # # Initialize Seller
-  # let!(:user2) { create(:user, :broker) }
-  # let!(:stock) { create(:stock, :p10_q1000) }
-  # let!(:user_stock) { create(:user_stock, user: user2, stock: stock) }
-  # let!(:seller_order) { create(:order, user: user2, stock: stock) }
+  it 'no matching buy/sell orders creates no transaction' do
+    create(:user_stock, user: broker, stock: stock)
+    create(:order, user: broker, stock: stock, price: 1_000, quantity: 75)
+
+    create(:order, :buying, user: buyer, stock: stock, price: 1, quantity: 100)
+    expect(Order.count).to eq(2)
+    expect(buyer.user_stocks.count).to eq(0)
+    expect(TransactionRecord.count).to eq(0)
+  end
 
   it 'same quantity buy/sell orders destroys both orders' do
-    # Seller
-    user2 = create(:user, :broker)
-    stock = create(:stock, :p10_q100)
-    create(:user_stock, user: user2, stock: stock)
-    create(:order, user: user2, stock: stock)
+    create(:user_stock, user: broker, stock: stock)
+    create(:order, user: broker, stock: stock)
 
-    # Buyer
-    user = create(:user, :buyer)
-    create(:order, :buying, user: user, stock: stock)
+    create(:order, :buying, user: buyer, stock: stock)
     expect(Order.count).to eq(0)
   end
 
-  it '1 75Q buy/ 2 50Q sell order destroys buy order' do
-    # Seller
-    user2 = create(:user, :broker)
-    stock = create(:stock, :p10_q100)
-    create(:user_stock, user: user2, stock: stock)
-    create(:order, user: user2, stock: stock, quantity: 50)
-    create(:order, user: user2, stock: stock, quantity: 50)
+  it '2 sell orders (100Q) destroys 1 buy order (75Q)' do
+    create(:user_stock, user: broker, stock: stock)
+    create(:order, user: broker, stock: stock, quantity: 50)
+    create(:order, user: broker, stock: stock, quantity: 50)
 
-    # Buyer
-    user = create(:user, :buyer)
-    create(:order, :buying, user: user, stock: stock, quantity: 75)
+    create(:order, :buying, user: buyer, stock: stock, quantity: 75)
     expect(Order.count).to eq(1)
     expect(Order.last.quantity).to eq(25)
     expect(Order.last.transaction_type).to eq('sell')
   end
 
-  it '2 50Q buy/ 1 75Q sell order destroys sell order' do
-    # Seller
-    user2 = create(:user, :broker)
-    stock = create(:stock, :p10_q100)
-    create(:user_stock, user: user2, stock: stock)
-    create(:order, user: user2, stock: stock, quantity: 75)
+  it '1 sell order (100Q) destroys 2 buy order (75)' do
+    create(:user_stock, user: broker, stock: stock)
+    create(:order, user: broker, stock: stock, quantity: 100)
 
-    # Buyer
-    user = create(:user, :buyer)
-    create(:order, :buying, user: user, stock: stock, quantity: 100)
+    create(:order, :buying, user: buyer, stock: stock, quantity: 70)
+    create(:order, :buying, user: buyer, stock: stock, quantity: 5)
+    expect(Order.count).to eq(1)
+    expect(Order.last.quantity).to eq(25)
+    expect(Order.last.transaction_type).to eq('sell')
+  end
+
+  it '2 buy orders (100Q) destroys 1 sell order (75Q)' do
+    create(:user_stock, user: broker, stock: stock)
+    create(:order, user: broker, stock: stock, quantity: 75)
+
+    create(:order, :buying, user: buyer, stock: stock, quantity: 100)
     expect(Order.count).to eq(1)
     expect(Order.last.quantity).to eq(25)
     expect(Order.last.transaction_type).to eq('buy')
   end
 
-  it 'no order execution when sell/buy orders exist but do not match' do
-    # Seller
-    user2 = create(:user, :broker)
-    stock = create(:stock, :p10_q100)
-    create(:user_stock, user: user2, stock: stock)
-    create(:order, user: user2, stock: stock, price: 1_000, quantity: 75)
+  it '1 buy order (100Q) destroys 2 sell order (75Q)' do
+    create(:user_stock, user: broker, stock: stock)
+    create(:order, user: broker, stock: stock, quantity: 42)
+    create(:order, user: broker, stock: stock, quantity: 33)
 
-    # Buyer
-    user = create(:user, :buyer)
-    create(:order, :buying, user: user, stock: stock, price: 1, quantity: 100)
-    expect(Order.count).to eq(2)
-    expect(user.user_stocks.count).to eq(0)
+    create(:order, :buying, user: buyer, stock: stock, quantity: 100)
+    expect(Order.count).to eq(1)
+    expect(Order.last.quantity).to eq(25)
+    expect(Order.last.transaction_type).to eq('buy')
   end
 end
