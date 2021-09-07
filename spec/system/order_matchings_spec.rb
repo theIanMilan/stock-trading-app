@@ -5,23 +5,17 @@ RSpec.describe 'OrderMatchings', type: :system do
     driven_by(:rack_test)
   end
 
+  # Initialize Buyer
   let!(:user)  { create(:user, :buyer) }
 
+  # Initialize Seller
   let!(:user2) { create(:user, :broker) }
-  let!(:stock) { create(:stock) }
-  let!(:user_stock) do
-    create(:user_stock, user: user2, stock: stock,
-           average_price: stock.last_transaction_price,
-           total_shares: stock.quantity)
-  end
-  let!(:order) do
-    create(:order, user: user2,
-           stock: stock,
-           price: (user_stock.average_price + 1),
-           quantity: user_stock.total_shares)
-  end
+  let!(:stock) { create(:stock, :p10_q1000) }
+  let!(:user_stock) { create(:user_stock, user: user2, stock: stock) }
+  let!(:seller_order) { create(:order, user: user2, stock: stock) }
 
   it 'buy order that matches sell order executes' do
-    expect(order).to be_valid
+    create(:order, :buying, user: user, stock: stock)
+    expect(Order.count).to eq(0)
   end
 end

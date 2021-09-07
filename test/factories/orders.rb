@@ -3,7 +3,15 @@ FactoryBot.define do
     association :user
     association :stock
     transaction_type { 'sell' }
-    price { Faker::Number.decimal(l_digits: 2, r_digits: 2) }
-    quantity { Faker::Number.within(range: 10..100) }
+    price { stock.last_transaction_price }
+    quantity { stock.quantity }
+  end
+
+  trait :buying do
+    transaction_type { 'buy' }
+  end
+
+  trait :selling do
+    transaction_type { 'sell' }
   end
 end
