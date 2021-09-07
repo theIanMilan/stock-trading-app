@@ -6,9 +6,10 @@ class Order < ApplicationRecord
 
   validates :price, numericality: { greater_than: 0 }
   validates :quantity, numericality: { greater_than_or_equal_to: 0 }
-  # validate :total_buy_price_cannot_exceed_user_balance
-  # validate :sell_quantity_cannot_exceed_user_stocks
-  # validate :buy_quantity_cannot_exceed_max_stock_quantity
+  validates :transaction_type, inclusion: { in: %w[buy sell] }
+  validate :total_buy_price_cannot_exceed_user_balance
+  validate :sell_quantity_cannot_exceed_user_stocks
+  validate :buy_quantity_cannot_exceed_max_stock_quantity
 
   enum transaction_type: { buy: 0, sell: 1 }
 
@@ -132,22 +133,20 @@ class Order < ApplicationRecord
 
   # Custom Validations
   def total_buy_price_cannot_exceed_user_balance
-    user = User.find(user_id)
-
+    return if price.nil? || quantity.nil?
     return unless transaction_type == 'buy' && (user.balance < (price * quantity))
 
     errors.add(:price, 'Insufficient funds with the given price and quantity.')
   end
 
   def sell_quantity_cannot_exceed_user_stocks
-    user = User.find(user_id)
-
     return unless transaction_type == 'sell' && quantity > user.user_stocks.find_by(stock_id: stock_id)[:total_shares]
 
     errors.add(:quantity, 'Insufficient user stocks to sell.')
   end
 
   def buy_quantity_cannot_exceed_max_stock_quantity
+    return if quantity.nil?
     return unless transaction_type == 'buy' && quantity > stock.quantity
 
     errors.add(:quantity, 'Buy quantity cannot exceed total available stock quantity.')
