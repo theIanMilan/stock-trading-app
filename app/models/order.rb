@@ -32,28 +32,18 @@ class Order < ApplicationRecord
   end
 
   def process_order
-    @user_stock = user.user_stocks.find_by(stock_id: stock_id)
-    if @user_stock.nil?
-      # Create New empty user_stock if user has no associated stock
-      @user_stock = user.user_stocks.create!(
-        stock_id: stock.id,
-        user_id: user,
-        average_price: 0.0,
-        total_shares: 0
-      )
+    # Finds record else Create New empty user_stock if user has no associated stock
+    @user_stock = user.user_stocks.find_or_create_by(stock_id: stock_id) do |us|
+      us.average_price = 0
+      us.total_shares = 0
     end
 
     @user2_order = @matching_orders.first
     @user2 = @user2_order.user
-    @user2_stock = @user2.user_stocks.find_by(stock_id: stock_id)
-    if @user2_stock.nil?
-      # Create New empty user_stock if user2 has no associated stock
-      @user2_stock = @user2.user_stocks.create!(
-        stock_id: stock.id,
-        user_id: @user2_stock,
-        average_price: 0.0,
-        total_shares: 0
-      )
+    # Finds record else Create New empty user_stock if user2 has no associated stock
+    @user2_stock = @user2.user_stocks.find_or_create_by(stock_id: stock_id) do |us|
+      us.average_price = 0
+      us.total_shares = 0
     end
 
     Order.transaction do
