@@ -38,7 +38,7 @@ RSpec.describe 'OrderMatchings', type: :system do
     expect(Order.last.transaction_type).to eq('sell')
   end
 
-  it '1 sell order (100Q) destroys 2 buy order (75)' do
+  it '1 sell order (100Q) destroys 2 buy order (75Q)' do
     create(:user_stock, user: broker, stock: stock)
     create(:order, user: broker, stock: stock, quantity: 100)
 

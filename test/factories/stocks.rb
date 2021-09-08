@@ -7,6 +7,7 @@ FactoryBot.define do
   end
 
   trait :p10_q100 do
+    # For quick rspec transactions
     last_transaction_price { 10 }
     quantity { 100 }
   end
