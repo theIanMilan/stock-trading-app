@@ -57,15 +57,10 @@ Rails.application.configure do
 
   #Devise mailer
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
-
   config.action_mailer.perform_caching = false
-
   config.action_mailer.perform_deliveries = true
-  
   config.action_mailer.raise_delivery_errors = true
-  
   config.action_mailer.delivery_method = :smtp
-  
   config.action_mailer.smtp_settings = {
     user_name:      ENV['MAIL_USERNAME'],
     password:       ENV['MAIL_PASSWORD'],
@@ -75,4 +70,10 @@ Rails.application.configure do
     authentication: 'login',
     enable_starttls_auto: true
   }
+
+  IEX::Api.configure do |config|
+    config.publishable_token = ENV['TEST_IEX_API_PUBLISHABLE_TOKEN']
+    config.secret_token = ENV['TEST_IEX_API_SECRET_TOKEN']
+    config.endpoint = 'https://sandbox.iexapis.com/v1'
+  end
 end
