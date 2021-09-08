@@ -54,8 +54,8 @@ ActiveRecord::Schema.define(version: 2021_09_04_014922) do
   create_table "user_stocks", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "stock_id"
-    t.decimal "average_price", precision: 8, scale: 2
-    t.integer "total_shares"
+    t.decimal "average_price", precision: 8, scale: 2, default: "0.0"
+    t.integer "total_shares", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["stock_id"], name: "index_user_stocks_on_stock_id"

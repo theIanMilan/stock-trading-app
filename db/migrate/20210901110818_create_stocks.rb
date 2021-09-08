@@ -11,8 +11,8 @@ class CreateStocks < ActiveRecord::Migration[6.0]
     create_table :user_stocks do |t|
       t.belongs_to :user
       t.belongs_to :stock
-      t.decimal :average_price, precision: 8, scale: 2
-      t.integer :total_shares
+      t.decimal :average_price, precision: 8, scale: 2, default: 0.0
+      t.integer :total_shares, default: 0
       t.timestamps
     end
 
