@@ -72,7 +72,7 @@ ActiveRecord::Schema.define(version: 2021_09_04_014922) do
     t.string "username"
     t.string "firstname"
     t.string "lastname"
-    t.decimal "balance", precision: 8, scale: 2, default: "5000.0"
+    t.decimal "balance", precision: 15, scale: 2, default: "5000.0"
     t.integer "broker_status", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
