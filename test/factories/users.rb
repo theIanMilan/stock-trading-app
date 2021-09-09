@@ -6,6 +6,7 @@ FactoryBot.define do
     firstname { Faker::Name.first_name }
     lastname { Faker::Name.last_name }
     role { 'buyer' }
+    balance { 5_000 }
 
     # Skips specific callback when building
     after(:build) do |user|
