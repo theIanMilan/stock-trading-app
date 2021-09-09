@@ -1,6 +1,7 @@
 class Order < ApplicationRecord
   belongs_to :user
   belongs_to :stock
+
   scope :buy_transactions, -> { where transaction_type: 'buy' }
   scope :sell_transactions, -> { where transaction_type: 'sell' }
 
@@ -32,6 +33,7 @@ class Order < ApplicationRecord
   end
 
   def process_order
+    UserStock.skip_callback(:create, :after, :add_price_and_quantity) # Temporarily skip user_stock callback
     # Finds record else Create New empty user_stock if user has no associated stock
     @user_stock = user.user_stocks.find_or_create_by(stock_id: stock_id) do |us|
       us.average_price = 0
@@ -45,6 +47,7 @@ class Order < ApplicationRecord
       us.average_price = 0
       us.total_shares = 0
     end
+    UserStock.set_callback(:create, :after, :add_price_and_quantity)
 
     Order.transaction do
       case transaction_type
@@ -84,6 +87,7 @@ class Order < ApplicationRecord
       # flash[:notice] = 'Order successfully executed.'
       # Update and Destroy Orders
       update_quantity_of_orders(self, @user2_order, match_quantity)
+      stock.update_last_price(match_price)
       destroy_zero_quantity_orders
       # Due to after_save callback, this will process next unfulfilled and matching orders until there are no more matches
     end

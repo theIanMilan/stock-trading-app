@@ -25,6 +25,10 @@ RSpec.describe 'OrderMatchings', type: :system do
 
     create(:order, :buying, user: buyer, stock: stock)
     expect(Order.count).to eq(0)
+    expect(TransactionRecord.last.stock).to eq(stock)
+    expect(broker.user_stocks.count).to eq(0)
+    # Buyer without stocks that buys all of avail stocks will have quantity equal avail stock
+    expect(buyer.user_stocks.find_by(stock: stock).total_shares).to eq(stock.quantity)
   end
 
   it '2 sell orders (100Q) destroys 1 buy order (75Q)' do
@@ -36,6 +40,8 @@ RSpec.describe 'OrderMatchings', type: :system do
     expect(Order.count).to eq(1)
     expect(Order.last.quantity).to eq(25)
     expect(Order.last.transaction_type).to eq('sell')
+    expect(buyer.user_stocks.find_by(stock: stock).total_shares).to eq(75)
+    expect(broker.user_stocks.last.total_shares).to eq(25)
   end
 
   it '1 sell order (100Q) destroys 2 buy order (75Q)' do
@@ -47,6 +53,8 @@ RSpec.describe 'OrderMatchings', type: :system do
     expect(Order.count).to eq(1)
     expect(Order.last.quantity).to eq(25)
     expect(Order.last.transaction_type).to eq('sell')
+    expect(buyer.user_stocks.find_by(stock: stock).total_shares).to eq(75)
+    expect(broker.user_stocks.last.total_shares).to eq(25)
   end
 
   it '2 buy orders (100Q) destroys 1 sell order (75Q)' do
@@ -57,6 +65,8 @@ RSpec.describe 'OrderMatchings', type: :system do
     expect(Order.count).to eq(1)
     expect(Order.last.quantity).to eq(25)
     expect(Order.last.transaction_type).to eq('buy')
+    expect(buyer.user_stocks.find_by(stock: stock).total_shares).to eq(75)
+    expect(broker.user_stocks.last.total_shares).to eq(25)
   end
 
   it '1 buy order (100Q) destroys 2 sell order (75Q)' do
@@ -68,5 +78,27 @@ RSpec.describe 'OrderMatchings', type: :system do
     expect(Order.count).to eq(1)
     expect(Order.last.quantity).to eq(25)
     expect(Order.last.transaction_type).to eq('buy')
+    expect(buyer.user_stocks.find_by(stock: stock).total_shares).to eq(75)
+    expect(broker.user_stocks.last.total_shares).to eq(25)
+  end
+
+  it 'selling stock below and above price changes its last_transaction_price' do
+    create(:user_stock, user: broker, stock: stock)
+    create(:order, user: broker, stock: stock, price: 90, quantity: 10)
+
+    # Below Market Price
+    create(:order, :buying, user: buyer, stock: stock, price: 90, quantity: 10)
+    expect(Order.count).to eq(0)
+    expect(TransactionRecord.last.stock).to eq(stock)
+    expect(broker.user_stocks.count).to eq(1)
+    expect(stock.last_transaction_price).to eq(90)
+
+    # Above Market Price
+    create(:order, user: broker, stock: stock, price: 110, quantity: 10)
+    create(:order, :buying, user: buyer, stock: stock, price: 110, quantity: 10)
+    expect(Order.count).to eq(0)
+    expect(TransactionRecord.last.stock).to eq(stock)
+    expect(broker.user_stocks.count).to eq(1)
+    expect(stock.last_transaction_price).to eq(110)
   end
 end

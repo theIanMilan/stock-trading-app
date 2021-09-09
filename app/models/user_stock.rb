@@ -6,6 +6,8 @@ class UserStock < ApplicationRecord
   validates :total_shares, numericality: { greater_than_or_equal_to: 0 }
 
   after_create :add_price_and_quantity
+  # With the after_create callback, Need to skip when creating through order matching
+  # Without skip, it triggers this callback and results to double shares
 
   def add_price_and_quantity
     self.average_price = stock.last_transaction_price

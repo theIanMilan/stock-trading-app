@@ -10,4 +10,9 @@ class Stock < ApplicationRecord
                            uniqueness: true
   validates :last_transaction_price, numericality: { greater_than: 0 }
   validates :quantity, numericality: { greater_than: 0 }
+
+  def update_last_price(price)
+    self.last_transaction_price = price
+    save!
+  end
 end
