@@ -5,6 +5,7 @@ class CreateStocks < ActiveRecord::Migration[6.0]
       t.string :company_name
       t.decimal :last_transaction_price, precision: 8, scale: 2
       t.integer :quantity
+      t.string :logo
       t.timestamps
     end
 

@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 2021_09_04_014922) do
     t.string "company_name"
     t.decimal "last_transaction_price", precision: 8, scale: 2
     t.integer "quantity"
+    t.string "logo"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["company_name"], name: "index_stocks_on_company_name", unique: true
