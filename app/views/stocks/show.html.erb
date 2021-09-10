@@ -1,52 +1,55 @@
-<p id="notice"><%= notice %></p>
-
 <div class= "body-container">
-  <div><%= @stock.ticker %></div>
-  <div><%= @stock.company_name %></div>
-  <div><%= @stock.last_transaction_price %></div>
-  <div><%= @stock.quantity %></div>
+  <div class="stockshow-container">
+    <p id="notice"><%= notice %></p>
 
-  <%= link_to 'Edit', edit_stock_path(@stock) %> |
-  <%= link_to 'Back', stocks_path %>
+    <div class="company-info-container">
+      <h1><%= @stock.company_name %> (<%= @stock.ticker %>)</h1>
+      <h4> Last transaction price: Php <%= @stock.last_transaction_price %></h4>
+      <h4>Stocks: <%= @stock.quantity %></h4>
+    </div>
 
-  <h2>Orders<h2>
-    <table class="table table-dark table-striped">
-      <thead>
-        <tr>
-          <th scope="col">Order Type</th>
-          <th scope="col">Price</th>
-          <th scope="col">Quantity</th>
-        </tr>
-      </thead>
-        <% @buy_orders.each do |order| %>
-      <tbody>
-        <tr>
-          <td><%= order.transaction_type %></td>
-          <td><%= order.price %></td>
-          <td><%= order.quantity %></td>
-        </tr>
-      </tbody>
-      <% end %>
-    </table>
+    <%= link_to 'Edit', edit_stock_path(@stock) %> |
+    <%= link_to 'Back', stocks_path %>
 
-    <table class="table table-dark table-striped">
-      <thead>
-        <tr>
-          <th scope="col">Order Type</th>
-          <th scope="col">Price</th>
-          <th scope="col">Quantity</th>
-        </tr>
-      </thead>
-        <% @sell_orders.each do |order| %>
-      <tbody>
-        <tr>
-          <td><%= order.transaction_type %></td>
-          <td><%= order.price %></td>
-          <td><%= order.quantity %></td>
-        </tr>
-      </tbody>
-      <% end %>
-    </table>
+    <h2>Orders<h2>
+      <table class="table table-dark table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Order Type</th>
+            <th scope="col">Price</th>
+            <th scope="col">Quantity</th>
+          </tr>
+        </thead>
+          <% @buy_orders.each do |order| %>
+        <tbody>
+          <tr>
+            <td><%= order.transaction_type %></td>
+            <td><%= order.price %></td>
+            <td><%= order.quantity %></td>
+          </tr>
+        </tbody>
+        <% end %>
+      </table>
 
-<%= link_to 'Add Order', new_stock_order_path(@stock) %>
+      <table class="table table-dark table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Order Type</th>
+            <th scope="col">Price</th>
+            <th scope="col">Quantity</th>
+          </tr>
+        </thead>
+          <% @sell_orders.each do |order| %>
+        <tbody>
+          <tr>
+            <td><%= order.transaction_type %></td>
+            <td><%= order.price %></td>
+            <td><%= order.quantity %></td>
+          </tr>
+        </tbody>
+        <% end %>
+      </table>
+
+  <%= link_to 'Add Order', new_stock_order_path(@stock) %>
+  </div>
 </div>
