@@ -10,10 +10,10 @@
   <tbody>
     <% @transaction_records.each do |transaction| %>
       <tr>
-        <td><%= transaction.ticker %>
-        <td><%= transaction.company_name %>
+        <td><%= transaction.stock.ticker %>
+        <td><%= transaction.stock.company_name %>
         <td><%= transaction.price %>
-        <td><%= transaction.quantity %>
+        <td><%= number_with_delimiter(transaction.quantity) %>
         <td><%= transaction.created_at %>
       </tr>
     <% end %>
