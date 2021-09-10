@@ -24,10 +24,11 @@ nasdaq_100 = [
 # Stock real-time prices are not included in the free version of IEX gem
 @broker = User.find_by(username: 'StockUpBrokers')
 nasdaq_100.each do |symbol|
-    historical_prices = client.historical_prices(symbol, {range: 'date', date: Date.yesterday, chartByDay: 'true'})
+    # historical_prices = client.historical_prices(symbol, {range: 'date', date: Date.yesterday, chartByDay: 'true'})
     stock = Stock.create!(ticker: symbol,
                           company_name: client.company(symbol).company_name,
-                          last_transaction_price: historical_prices.first.close,
+                          last_transaction_price: rand(10.0..1_000.0).round(2),
+                          # last_transaction_price: historical_prices.first.close,
                           quantity: rand(100..100_000),
                           logo: client.logo(symbol).url
                         )
