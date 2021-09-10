@@ -1,0 +1,56 @@
+.portfolio-container {
+  padding: 2rem;
+}
+
+.portfolio-container h2 {
+  font-size: 2.7rem;
+}
+
+.user-info {
+  background-color: var(--secondary-bg-color);
+  display: flex;
+  flex-direction: row;
+  padding: 1rem;
+  border-radius: 10px;
+  width: 550px;
+  margin-bottom: 2rem;
+}
+
+#user-icon {
+  margin-right: 1.5rem;
+}
+
+#user-icon img {
+  height: 100px;
+}
+
+#wallet-container h5 {
+  color: white;
+  font-size: 1.5rem;
+}
+
+#wallet-container h3 {
+  color: var(--secondary-color);
+  font-size: 2.8rem;
+}
+
+#my-portfolio {
+  color: white;
+  font-size: 2.5rem;
+}
+
+.portfolio-cards {
+  display: flex;
+  flex-direction: row;
+  background-color: var(--secondary-bg-color);
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+.p-card {
+  background-color: var(--secondary-color);
+  width: 13rem;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-right: 2rem;
+}

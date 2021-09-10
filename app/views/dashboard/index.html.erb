@@ -1,13 +1,22 @@
 <div class= "body-container">
-  <div class= "user-info"> 
-    <h2>Hello <%= current_user.username %></h2>
-  </div>
-  <h1> My Portfolio </h1>
-  <% @user_stocks.each do |ustock| %>
+  <div class= "portfolio-container">
+  <h2>Hello <%= current_user.username %></h2>
+    <div class= "user-info"> 
+      <div id="user-icon"><%= image_tag("figma_icons/account_circle.png", alt: "trending up icon") %></div>
+      <div id="wallet-container"><h5>Your Wallet</h5> <h3>Php <%= current_user.balance %><h3></div>
+    </div>
+    <h1 id="my-portfolio"> My Portfolio </h1>
+
     <div class= "portfolio-cards">
-      <div><%= ustock.ticker%></div> 
-      <div><%= ustock.total_shares%></div> 
-      <div><%= ustock.average_price%></div> 
-      </div>
-  <% end %>
+      <% @user_stocks.each do |ustock| %>
+        <div class="p-card">
+          <h5 class="p-card-title"><%= ustock.stock.ticker%></h5>
+          <h6 class="p-card-subtitle mb-2 text-muted"><%= ustock.stock.company_name%></h6>
+          <p class="p-card-text">Total shares: <%= ustock.total_shares%></p>
+          <p class="p-card-text">Average price: <%= ustock.average_price%></p>
+          <a href="#" class="card-link">View</a>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>
