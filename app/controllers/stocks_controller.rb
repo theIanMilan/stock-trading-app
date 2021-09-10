@@ -22,10 +22,7 @@ class StocksController < ApplicationController
     @stock = Stock.new(stock_params)
     if @stock.save
       # Associate with Broker
-      current_user.stocks << @stock
-      # Update user_stocks
-      current_user.user_stocks.where(stock_id: @stock)
-                  .update(average_price: @stock.last_transaction_price, total_shares: @stock.quantity)
+      UserStock.create(user_id: current_user.id, stock_id: @stock.id)
       flash.notice = 'Stock was successfully added.'
       redirect_to stock_path(@stock)
     else

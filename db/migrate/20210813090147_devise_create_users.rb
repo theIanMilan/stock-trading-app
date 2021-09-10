@@ -37,7 +37,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
       t.string :username
       t.string :firstname
       t.string :lastname
-      t.decimal :balance, default: 5_000.00, precision: 8, scale: 2
+      t.decimal :balance, default: 5_000.00, precision: 15, scale: 2
       t.integer :broker_status, default: 0
 
       t.timestamps null: false

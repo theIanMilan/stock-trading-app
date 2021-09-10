@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 2021_09_04_014922) do
     t.string "company_name"
     t.decimal "last_transaction_price", precision: 8, scale: 2
     t.integer "quantity"
+    t.string "logo"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["company_name"], name: "index_stocks_on_company_name", unique: true
@@ -54,8 +55,8 @@ ActiveRecord::Schema.define(version: 2021_09_04_014922) do
   create_table "user_stocks", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "stock_id"
-    t.decimal "average_price", precision: 8, scale: 2
-    t.integer "total_shares"
+    t.decimal "average_price", precision: 8, scale: 2, default: "0.0"
+    t.integer "total_shares", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["stock_id"], name: "index_user_stocks_on_stock_id"
@@ -72,7 +73,7 @@ ActiveRecord::Schema.define(version: 2021_09_04_014922) do
     t.string "username"
     t.string "firstname"
     t.string "lastname"
-    t.decimal "balance", precision: 8, scale: 2, default: "5000.0"
+    t.decimal "balance", precision: 15, scale: 2, default: "5000.0"
     t.integer "broker_status", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
