@@ -22,11 +22,6 @@ RSpec.describe Stock, type: :model do
       expect(stock).not_to be_valid
     end
 
-    it 'is not valid with duplicate company_name' do
-      create(:stock, company_name: 'Abacus Corp.')
-      expect(build(:stock, company_name: 'Abacus Corp.')).not_to be_valid
-    end
-
     it 'is not valid without a company_name' do
       stock.company_name = nil
       expect(stock).not_to be_valid
