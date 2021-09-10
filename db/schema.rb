@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 2021_09_04_014922) do
     t.string "logo"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["company_name"], name: "index_stocks_on_company_name", unique: true
+    t.index ["company_name"], name: "index_stocks_on_company_name"
     t.index ["ticker"], name: "index_stocks_on_ticker", unique: true
   end
 
