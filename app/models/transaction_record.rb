@@ -5,8 +5,4 @@ class TransactionRecord < ApplicationRecord
 
   validates :price, numericality: { greater_than: 0 }
   validates :quantity, numericality: { greater_than: 0 }
-
-  def stock
-    Stock.find(stock_id)
-  end
 end

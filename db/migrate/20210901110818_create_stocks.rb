@@ -18,6 +18,6 @@ class CreateStocks < ActiveRecord::Migration[6.0]
     end
 
     add_index :stocks, :ticker,          unique: true
-    add_index :stocks, :company_name,    unique: true
+    add_index :stocks, :company_name
   end
 end
