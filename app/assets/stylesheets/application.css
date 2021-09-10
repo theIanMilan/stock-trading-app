@@ -24,7 +24,9 @@
 }
 
 /* Reset padding, border, margin */
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
@@ -71,4 +73,8 @@ p {
 
 .body-container {
   background: var(--bg-color);
+}
+
+a:hover {
+  background-color: transparent;
 }
