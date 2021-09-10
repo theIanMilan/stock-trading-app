@@ -6,12 +6,14 @@
 
 <div class= "portfolio-cards">
       <% @stocks.each do |stock| %>
+       <%= link_to stock_path(stock) do %>
         <div class="p-card">
-          <h5 class="p-card-title"><%= link_to stock.ticker, stock%></h5>
+          <h5 class="p-card-title"><%= stock.ticker %></h5>
           <h6 class="p-card-subtitle mb-2 text-muted"><%= stock.company_name%></h6>
           <p class="p-card-text">Last bought at: Php <%= number_with_precision(stock.last_transaction_price, precision: 2) %></p>
           <p class="p-card-text">Stock quantity: <%= number_with_delimiter(stock.quantity) %></p>
         </div>
+        <% end %>
       <% end %>
     </div>
 

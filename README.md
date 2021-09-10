@@ -3,7 +3,9 @@ View the live app [at heroku.](https://stockup-trading.herokuapp.com/)
 
 ## Introduction
 
-A project to explore Test-driven development (TDD).
+StockUp-Trading is a project made by [Ian Mandap](https://github.com/theIanMilan) and [Miguel Calderon](https://github.com/miguel425) that allows users to sign up and simulate trades of NASDAQ-100 listed stocks. Trades are made possible through an ordering system whereby upon order creation, the backend checks for matching buy/sell order pairs and executes the transaction.  
+
+The goal in building this app was to learn about test driven development through RSpec, advanced database associations (e.g. has_many :through association), callbacks, API integration, method scoping, and the skinny controller, and fat model concept.
 
 ## Screenshots
 
@@ -12,7 +14,10 @@ A project to explore Test-driven development (TDD).
     <img src="app/assets/images/Blog-App-2.png" alt="Blog Screenshot 2" width="500" height="300">
 </p> -->
 
-## App Architecture:
+## App Architecture/ Entity Relationship Diagram:
+<p float = 'left'>
+    <img src="https://user-images.githubusercontent.com/66746718/132863676-ba8bc3d0-bdeb-4662-9444-0b99c230112e.jpg" width="400" height="400">
+</p>
 
 ## Technologies
 
@@ -22,9 +27,13 @@ A project to explore Test-driven development (TDD).
 * Yarn 1.22.4
 * CSS and SCSS
 * PostgresQL
-<!-- * [Trix](https://github.com/basecamp/trix)
-* `toastr` for notifications
-* `image-processing` gem -->
+* Bootstrap
+* `devise` gem for authentication
+* `cancancan` gem for authorization
+* `rails_admin` gem for Admin dashboard
+* `iex-ruby-client` gem for Stock info API
+* `factory_bot_rails` gem
+* `faker` gem
 
 #### Setup
 
@@ -33,5 +42,10 @@ A project to explore Test-driven development (TDD).
   $ yarn install --check-files
   $ bundle exec rails webpacker:install
   $ rails db:setup
+  $ sudo apt-get install chromium-chromedriver
 ```
-Note: `database.yml` uses ENV variables to fetch database username and password. See this [stackoverflow thread](https://stackoverflow.com/a/17151962/15233426) for more details.
+
+#### To-Dos
+* Mobile Responsiveness
+* Market charts for stocks
+* CSS Styling for `devise` views
