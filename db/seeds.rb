@@ -28,7 +28,7 @@ nasdaq_100.each do |symbol|
     stock = Stock.create!(ticker: symbol,
                           company_name: client.company(symbol).company_name,
                           last_transaction_price: historical_prices.first.close,
-                          quantity: Faker::Number.within(range: 100..100_000),
+                          quantity: rand(100..100_000),
                           logo: client.logo(symbol).url
                         )
     UserStock.create!(user_id: @broker.id, stock_id: stock.id)
