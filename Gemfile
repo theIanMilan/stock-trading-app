@@ -18,6 +18,7 @@ gem 'devise'
 gem 'cancancan'
 gem 'rails_admin', git: 'https://github.com/sferik/rails_admin.git'
 gem 'hamlit-rails'
+gem 'iex-ruby-client'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

@@ -109,4 +109,26 @@ Rails.application.configure do
   # config.active_record.database_selector = { delay: 2.seconds }
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
+
+  # Action Mailer
+  config.action_mailer.default_url_options = { host: 'stockup-trading.herokuapp.com', protocol: 'https' }
+  config.action_mailer.perform_caching = false
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    user_name:      ENV['MAIL_USERNAME'],
+    password:       ENV['MAIL_PASSWORD'],
+    domain:        'gmail.com',
+    address:       'smtp.gmail.com',
+    port:          '587',
+    authentication: 'login',
+    enable_starttls_auto: true
+  }
+
+  IEX::Api.configure do |config|
+    config.publishable_token = ENV['IEX_API_PUBLISHABLE_TOKEN']
+    config.secret_token = ENV['IEX_API_SECRET_TOKEN']
+    config.endpoint = 'https://cloud.iexapis.com/v1'
+  end
 end
