@@ -19,7 +19,7 @@ class UserStock < ApplicationRecord
     end
   end
 
-  def ticker
-    Stock.find(stock_id).ticker
+  def stock
+    Stock.find(stock_id)
   end
 end
