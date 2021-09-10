@@ -3,9 +3,10 @@
     <p id="notice"><%= notice %></p>
 
     <div class="company-info-container">
+      <img src="<%= @stock.logo %>">
       <h1><%= @stock.company_name %> (<%= @stock.ticker %>)</h1>
-      <h4> Last transaction price: Php <%= @stock.last_transaction_price %></h4>
-      <h4>Stocks: <%= @stock.quantity %></h4>
+      <h4> Last transaction price: Php <%= number_with_precision(@stock.last_transaction_price, precision: 2) %></h4>
+      <h4>Stocks: <%= number_with_delimiter(@stock.quantity) %></h4>
     </div>
 
     <%= link_to 'Edit', edit_stock_path(@stock) %> |
@@ -24,8 +25,8 @@
         <tbody>
           <tr>
             <td><%= order.transaction_type %></td>
-            <td><%= order.price %></td>
-            <td><%= order.quantity %></td>
+            <td><%= number_with_precision(order.price, precision: 2) %></td>
+            <td><%= number_with_delimiter(order.quantity) %></td>
           </tr>
         </tbody>
         <% end %>
@@ -43,8 +44,8 @@
         <tbody>
           <tr>
             <td><%= order.transaction_type %></td>
-            <td><%= order.price %></td>
-            <td><%= order.quantity %></td>
+            <td><%= number_with_precision(order.price, precision: 2) %></td>
+            <td><%= number_with_delimiter(order.quantity) %></td>
           </tr>
         </tbody>
         <% end %>

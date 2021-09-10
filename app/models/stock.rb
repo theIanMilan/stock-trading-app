@@ -6,8 +6,7 @@ class Stock < ApplicationRecord
 
   validates :ticker,       presence: true,
                            uniqueness: true
-  validates :company_name, presence: true,
-                           uniqueness: true
+  validates :company_name, presence: true
   validates :last_transaction_price, numericality: { greater_than: 0 }
   validates :quantity, numericality: { greater_than: 0 }
 
