@@ -28,8 +28,4 @@ class UserStock < ApplicationRecord
       update(average_price: final_total_value / final_total_shares)
     end
   end
-
-  def stock
-    Stock.find(stock_id)
-  end
 end

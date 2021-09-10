@@ -1,9 +1,9 @@
 <div class= "body-container">
   <div class= "portfolio-container">
-  <h2>Hello <%= current_user.username %></h2>
+  <h2>Hello <%= current_user.username %>!</h2>
     <div class= "user-info"> 
       <div id="user-icon"><%= image_tag("figma_icons/account_circle.png", alt: "trending up icon") %></div>
-      <div id="wallet-container"><h5>Your Wallet</h5> <h3>Php <%= current_user.balance %><h3></div>
+      <div id="wallet-container"><h5>Your Wallet</h5> <h3>Php <%= number_with_precision(current_user.balance, precision: 2, delimiter: ',') %><h3></div>
     </div>
     <h1 id="my-portfolio"> My Portfolio </h1>
 
@@ -12,8 +12,8 @@
         <div class="p-card">
           <h5 class="p-card-title"><%= ustock.stock.ticker%></h5>
           <h6 class="p-card-subtitle mb-2 text-muted"><%= ustock.stock.company_name%></h6>
-          <p class="p-card-text">Total shares: <%= ustock.total_shares%></p>
-          <p class="p-card-text">Average price: <%= ustock.average_price%></p>
+          <p class="p-card-text">Total shares: <%= number_with_delimiter(ustock.total_shares) %></p>
+          <p class="p-card-text">Average price: <%= number_with_precision(ustock.average_price, precision: 2) %></p>
           <a href="#" class="card-link">View</a>
         </div>
       <% end %>
