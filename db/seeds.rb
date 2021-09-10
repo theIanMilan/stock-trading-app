@@ -32,7 +32,7 @@ nasdaq_100.each do |symbol|
                         )
     UserStock.create!(user_id: @broker.id, stock_id: stock.id)
     Order.create!(transaction_type: 'sell', user_id: @broker.id, stock_id: stock.id, price: stock.last_transaction_price, quantity: stock.quantity)
-  rescue => StandardError
+  rescue => exception
   end
 end
 
