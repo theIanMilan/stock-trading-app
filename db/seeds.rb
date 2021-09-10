@@ -21,17 +21,20 @@ nasdaq_100 = [
 ]
 
 # Create Stocks
+# Stock real-time prices are not included in the free version of IEX gem
 @broker = User.find_by(username: 'StockUpBrokers')
 nasdaq_100.each do |symbol|
+    historical_prices = client.historical_prices(symbol, {range: 'date', date: Date.yesterday, chartByDay: 'true'})
     stock = Stock.create!(ticker: symbol,
                           company_name: client.company(symbol).company_name,
-                          last_transaction_price: client.price(symbol),
+                          last_transaction_price: historical_prices.first.close,
                           quantity: Faker::Number.within(range: 100..100_000),
                           logo: client.logo(symbol).url
                         )
     UserStock.create!(user_id: @broker.id, stock_id: stock.id)
     Order.create!(transaction_type: 'sell', user_id: @broker.id, stock_id: stock.id, price: stock.last_transaction_price, quantity: stock.quantity)
 end
+
 
 # Create Buy Orders
 @buyer = User.find_by(username: 'buyer')
