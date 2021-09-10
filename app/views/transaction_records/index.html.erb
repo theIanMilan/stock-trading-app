@@ -1,21 +1,26 @@
-<h1>Transaction History</h1>
+<div class= "body-container">
+<h1 style="color:white">Transaction History</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="7"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @transaction_records.each do |transaction| %>
-      <tr>
-        <td><%= transaction.stock.ticker %>
-        <td><%= transaction.stock.company_name %>
-        <td><%= number_with_precision(transaction.price, precision: 2) %>
-        <td><%= number_with_delimiter(transaction.quantity) %>
-        <td><%= transaction.created_at %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<table class="table table-dark table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Ticker</th>
+            <th scope="col">Name</th>
+            <th scope="col">Transaction price</th>
+            <th scope="col">Transaction quantity</th>
+            <th scope="col">Date posted</th>
+          </tr>
+        </thead>
+          <% @transaction_records.each do |transaction| %>
+        <tbody>
+          <tr>
+          <td><%= transaction.stock.ticker %>
+          <td><%= transaction.stock.company_name %>
+          <td><%= number_with_precision(transaction.price, precision: 2) %>
+          <td><%= number_with_delimiter(transaction.quantity) %>
+          <td><%= transaction.created_at %>
+          </tr>
+        </tbody>
+        <% end %>
+      </table>
+      </div>

@@ -1,15 +1,20 @@
 <div class="body-container">
-<div class="stock-dashboard-container">
+<div class="stock-market-container">
 <p id="notice"><%= notice %></p>
 
-<h1>Stocks</h1>
+<h1>Stock Market</h1>
 
 <div class= "portfolio-cards">
       <% @stocks.each do |stock| %>
        <%= link_to stock_path(stock) do %>
         <div class="p-card">
-          <h5 class="p-card-title"><%= stock.ticker %></h5>
-          <h6 class="p-card-subtitle mb-2 text-muted"><%= stock.company_name%></h6>
+          <div class="p-company-container">
+            <img src="<%= stock.logo %>">
+            <div>
+            <h5 class="p-card-title"><%= stock.ticker %></h5>
+            <h6 class="p-card-subtitle mb-2 text-muted"><%= stock.company_name%></h6>
+            </div>
+            </div>
           <p class="p-card-text">Last bought at: Php <%= number_with_precision(stock.last_transaction_price, precision: 2) %></p>
           <p class="p-card-text">Stock quantity: <%= number_with_delimiter(stock.quantity) %></p>
         </div>

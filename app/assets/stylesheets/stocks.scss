@@ -1,5 +1,17 @@
 /* FOR CARDS CSS, GO TO PORTFOLIO SCSS */
 
-.stock-dashboard-container h1 {
+.stock-market-container {
+  padding: 2rem;
+}
+
+.stock-market-container h1 {
   color: white;
+}
+
+.portfolio-cards a:hover {
+  background-color: transparent;
+}
+
+.p-company-container h6 {
+  font-size: 0.9rem;
 }

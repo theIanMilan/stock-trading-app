@@ -1,5 +1,9 @@
-<h1>New Stock</h1>
-
-<%= render 'form', stock: @stock %>
-
-<%= link_to 'Back', stocks_path %>
+<div class="body-container">
+  <div class="create-order-container">
+    <h1>New Stock</h1>
+    <div class="forms-container"
+      <%= render 'form', stock: @stock %>
+    </div>
+    <%= link_to 'Back', stocks_path %>
+  <div class="create-order-container">
+</div>
