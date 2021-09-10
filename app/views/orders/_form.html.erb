@@ -2,7 +2,7 @@
   <div>
     <%= f.label :transaction_type %>
     <br>
-    <%= f.select :transaction_type, ['buy', 'sell'] %>
+    <%= f.select :transaction_type, options_for_select(["buy", "sell"], disabled: @disabled) %>
   </div>
   
   <div>

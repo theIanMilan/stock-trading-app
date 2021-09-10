@@ -23,6 +23,7 @@ nasdaq_100 = [
 # Create Stocks
 @broker = User.find_by(username: 'StockUpBrokers')
 nasdaq_100.each do |symbol|
+  begin
     stock = Stock.create!(ticker: symbol,
                           company_name: client.company(symbol).company_name,
                           last_transaction_price: client.price(symbol),
@@ -31,6 +32,8 @@ nasdaq_100.each do |symbol|
                         )
     UserStock.create!(user_id: @broker.id, stock_id: stock.id)
     Order.create!(transaction_type: 'sell', user_id: @broker.id, stock_id: stock.id, price: stock.last_transaction_price, quantity: stock.quantity)
+  rescue => StandardError
+  end
 end
 
 # Create Buy Orders

@@ -17,6 +17,8 @@
 
 <br>
 
-<%= link_to 'New Stock', new_stock_path %>
+<% if current_user.role?('broker') %>
+  <%= link_to 'New Stock', new_stock_path %>
+<% end %>
 </div>
 </div>

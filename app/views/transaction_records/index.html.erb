@@ -12,7 +12,7 @@
       <tr>
         <td><%= transaction.stock.ticker %>
         <td><%= transaction.stock.company_name %>
-        <td><%= transaction.price %>
+        <td><%= number_with_precision(transaction.price, precision: 2) %>
         <td><%= number_with_delimiter(transaction.quantity) %>
         <td><%= transaction.created_at %>
       </tr>

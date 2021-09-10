@@ -5,6 +5,11 @@ class OrdersController < ApplicationController
 
   def new
     @order = current_user.orders.build
+    @disabled = if current_user.role?('buyer')
+                  ['sell']
+                else
+                  []
+                end
   end
 
   def edit; end
