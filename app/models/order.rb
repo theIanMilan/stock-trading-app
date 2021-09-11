@@ -14,7 +14,7 @@ class Order < ApplicationRecord
 
   enum transaction_type: { buy: 0, sell: 1 }
 
-  after_commit :match_and_execute_order
+  after_commit :match_and_execute_order, on: %i[create update]
 
   private
 
@@ -84,15 +84,12 @@ class Order < ApplicationRecord
         create_transaction(@user2, user, stock, match_price, match_quantity)
       end
 
-      # flash[:notice] = 'Order successfully executed.'
       # Update and Destroy Orders
       update_quantity_of_orders(self, @user2_order, match_quantity)
       stock.update_last_price(match_price)
       destroy_zero_quantity_orders
       # Due to after_save callback, this will process next unfulfilled and matching orders until there are no more matches
     end
-    # For Transaction errors:
-    # flash[:alert] = 'Fatal error encountered while procesing your order. Please try again.'
   end
 
   def transfer_balance(buyer, seller, total_value)
