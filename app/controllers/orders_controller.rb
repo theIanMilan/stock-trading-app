@@ -1,7 +1,6 @@
 class OrdersController < ApplicationController
   before_action :set_stock, only: %i[new create edit update destroy]
   before_action :set_order, only: %i[edit update destroy]
-  append_after_action :match_and_execute_order, only: %i[create update]
 
   def new
     @order = current_user.orders.build
@@ -17,9 +16,12 @@ class OrdersController < ApplicationController
   def create
     @order = current_user.orders.build(order_params)
     @order[:stock_id] = @stock.id
+    @order_quantity_copy = @order.quantity
 
     if @order.save
       flash.notice = 'Order was successfully added.'
+      # Check if transaction succeeded
+      flash.notice = 'Order was successfully executed.' if @order.quantity != @order_quantity_copy
       redirect_to stock_path(@stock)
     else
       flash.alert = 'Failed: Error in adding Order.'
