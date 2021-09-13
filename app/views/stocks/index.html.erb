@@ -19,7 +19,7 @@
 
 <br>
 
-<% if current_user.role?('broker') %>
+<% if can? :create, Stock %>
   <%= link_to 'New Stock', new_stock_path %>
 <% end %>
 </div>

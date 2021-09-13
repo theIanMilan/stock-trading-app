@@ -21,7 +21,7 @@
               <li><%= link_to 'Edit Account', edit_user_registration_path, class: 'dropdown-item' %></li>
               <li><%= link_to 'Transaction History', transactions_path, class: 'dropdown-item' %></li>
               <li><%= link_to "Logout", destroy_user_session_path, method: :delete, class: 'dropdown-item' %></li>
-              <% if current_user.role? :broker %>
+              <% if can? :create, Stock %>
                 <li><hr class="dropdown-divider"></li>
                 <li><%= link_to 'Add Company Stocks', new_stock_path, class: 'dropdown-item' %></li>
               <% end %>

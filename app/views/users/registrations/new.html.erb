@@ -29,9 +29,6 @@
 			</div>
 
       <div class="field" id="role-container">
-        <% if :role == "Broker" %>
-        <%= flash[:broker] %>
-        <% end %>
         <%= f.label :role, :class => "role-label" %><br />
         <%= f.select :role, ["buyer", "broker"] %>
       </div>

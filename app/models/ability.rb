@@ -6,10 +6,10 @@ class Ability
   def initialize(user)
     can :read, Stock
 
-    # return unless user.present?
+    return if user.blank?
 
-    # can :manage, Transaction, user: user
-    # can :manage, Order,       user: user
+    can :manage, TransactionRecord, user: user
+    can :manage, Order,             user: user
 
     return unless user.role? :broker
 

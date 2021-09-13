@@ -1,5 +1,5 @@
 class StocksController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index]
+  skip_before_action :authenticate_user!, only: %i[index show]
   load_and_authorize_resource # CanCan authorization helper
   before_action :set_stock, only: %i[show]
 

@@ -5,7 +5,7 @@ class OrdersController < ApplicationController
 
   def new
     @order = current_user.orders.build
-    @disabled = if current_user.role?('buyer')
+    @disabled = if current_user.user_stocks.find_by(stock: @stock).nil?
                   ['sell']
                 else
                   []
