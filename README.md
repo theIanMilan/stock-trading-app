@@ -47,5 +47,7 @@ The goal in building this app was to learn about test driven development through
 
 #### To-Dos
 * Mobile Responsiveness
+* Add percent change in stocks
+* Add JavaScript to Order forms to compute totals
 * Market charts for stocks
 * CSS Styling for `devise` views
