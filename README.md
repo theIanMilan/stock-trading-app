@@ -16,7 +16,7 @@ The goal in building this app was to learn about test driven development through
 
 ## App Architecture/ Entity Relationship Diagram:
 <p float = 'left'>
-    <img src="https://user-images.githubusercontent.com/66746718/132863676-ba8bc3d0-bdeb-4662-9444-0b99c230112e.jpg" width="400" height="400">
+    <img src="https://user-images.githubusercontent.com/66746718/133206674-f13b857f-2532-4af1-9408-ae537dab5119.png" width="670" height="600">
 </p>
 
 ## Technologies
