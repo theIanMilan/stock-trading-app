@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 2021_09_04_014922) do
   end
 
   create_table "transaction_records", force: :cascade do |t|
-    t.bigint "stock_id"
+    t.bigint "stock_id", null: false
     t.bigint "buyer_id", null: false
     t.bigint "broker_id", null: false
     t.decimal "price", precision: 8, scale: 2
@@ -82,4 +82,7 @@ ActiveRecord::Schema.define(version: 2021_09_04_014922) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "transaction_records", "stocks"
+  add_foreign_key "transaction_records", "users", column: "broker_id"
+  add_foreign_key "transaction_records", "users", column: "buyer_id"
 end
