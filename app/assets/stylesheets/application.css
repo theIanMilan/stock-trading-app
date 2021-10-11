@@ -51,6 +51,9 @@ a:visited {
   color: var(--primary-color);
   text-decoration: none;
 }
+a:hover {
+  background-color: #02020210;
+}
 
 input {
   background-color: var(--secondary-color);

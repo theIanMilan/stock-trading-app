@@ -128,6 +128,7 @@ class Order < ApplicationRecord
     return unless transaction_type == 'buy' && (user.balance < (price * quantity))
 
     errors.add(:price, 'Insufficient funds with the given price and quantity.')
+    errors.add(:quantity, 'Insufficient funds with the given price and quantity.')
   end
 
   def sell_quantity_cannot_exceed_user_stocks

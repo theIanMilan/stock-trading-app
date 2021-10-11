@@ -4,11 +4,11 @@ class OrdersController < ApplicationController
 
   def new
     @order = current_user.orders.build
-    @disabled = if current_user.user_stocks.find_by(stock: @stock).nil?
-                  ['sell']
-                else
-                  []
-                end
+    # @disabled = if current_user.user_stocks.find_by(stock: @stock).nil?
+    #               ['sell']
+    #             else
+    #               []
+    #             end
   end
 
   def edit; end
@@ -25,6 +25,7 @@ class OrdersController < ApplicationController
       redirect_to stock_path(@stock)
     else
       flash.alert = 'Failed: Error in adding Order.'
+      redirect_to new_stock_order_path(@stock) # Render doesn't seem to render erorr messages
     end
   end
 

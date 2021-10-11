@@ -1,12 +1,8 @@
 <div class= "body-container">
   <div class="stockshow-container">
 
-    <div class="company-info-container">
-      <img src="<%= @stock.logo %>">
-      <h1><%= @stock.company_name %> (<%= @stock.ticker %>)</h1>
-      <h4> Last transaction price: Php <%= number_with_precision(@stock.last_transaction_price, precision: 2) %></h4>
-      <h4>Stocks: <%= number_with_delimiter(@stock.quantity) %></h4>
-    </div>
+    <%= render partial: 'stock_info' %>
+
     <% if can? :update, Stock %>
       <%= link_to 'Edit', edit_stock_path(@stock) %> |
     <% end %>

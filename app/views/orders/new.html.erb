@@ -2,8 +2,11 @@
 <div class="create-order-container">
 <h1>Create Order</h1>
 
-<div class="forms-container">
-<%= render 'form', order: @order %>
+<div class="stockshow-container">
+  <%= render partial: 'stocks/stock_info' %>
+  <div id="wallet-container"><h5>Your Wallet</h5> <h4>Php <%= number_with_precision(current_user.balance, precision: 2, delimiter: ',') %><h3></div>
+  <br>
+  <%= render 'form', order: @order %>
 </div>
 
 <%= link_to 'Back', @stock %>

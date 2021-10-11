@@ -7,11 +7,10 @@ class StocksController < ApplicationController
     @stocks = Stock.all
   end
 
-  # GET /stocks/1 or /stocks/1.json
   def show
     @orders = @stock.orders
-    @buy_orders = @orders.buy_transactions
-    @sell_orders = @orders.sell_transactions
+    @buy_orders = @orders.buy_transactions.order('price ASC')
+    @sell_orders = @orders.sell_transactions.order('price DESC')
   end
 
   def new
@@ -27,6 +26,7 @@ class StocksController < ApplicationController
       redirect_to stock_path(@stock)
     else
       flash.alert = 'Failed: Error in adding Stock.'
+      render 'new'
     end
   end
 
